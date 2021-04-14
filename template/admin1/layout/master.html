@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin | Dashboard</title>
+ <!-- jvectormap -->
+  <link rel="stylesheet" href="{% static 'js/jquery-jvectormap.css' %}">
+  <!-- jvectormap  -->
+<script src="{% static 'js/jquery-jvectormap.js' %}"></script>
+
+<script src="https://use.fontawesome.com/a6018004ad.js"></script>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' %}">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{% static 'plugins/jqvmap/jqvmap.min.css' %}">
+  <!-- Theme style -->
+<link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.css' %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+ 
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="{% static 'images/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Admin</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <!-- <div class="image">
+          <img src="http://127.0.0.1:8000/media/{{x.image}}" class="img-circle elevation-2" alt="{{x.image}}">
+        </div> -->
+        <div class="info">
+          <a href="#" class="d-block">Welcome {{request.user.first_name}}&nbsp;&nbsp;{{request.user.last_name}}</a>
+        </div>
+      </div>
+  
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview">
+            <a href="/admin1/profile" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Profile
+                <i class="right"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin1/freelancer" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>Freelancer</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="/admin1/hirer" class="nav-link">
+              <i class="nav-icon fa fa-users-cog"></i>
+              <p>Hirer
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="/admin1/paymentsection" class="nav-link">
+              <i class="fa fa-id-card" aria-hidden="true"></i>
+               <p>Payment Section</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="/admin1/projectbids" class="nav-link">
+              <i class="fa fa-gavel" aria-hidden="true"></i>
+               <p>Projects Bids</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="/admin1/Project" class="nav-link">
+              <i class="fa fa-gavel" aria-hidden="true"></i>
+               <p>Project</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="/admin1/reports" class="nav-link">
+              <i class="fa fa-address-book" aria-hidden="true"></i>
+               <p>Reports</p>
+               </a>
+          </li>
+           <li class="nav-item has-treeview">
+            <a href="/admin1/logout" class="nav-link">
+              <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+               <p>
+                {% csrf_token %}
+               Logout</p>
+            </a>
+          </li>
+      </nav>
+
+             
+             
+             
+             
+          
+          
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  
+{% block main %} {% endblock %}
+
+{% block footer %}
+<!-- <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.3-pre
+    </div>
+  </footer> -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- ChartJS -->
+<script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
+<!-- Sparkline -->
+<script src="{% static 'plugins/sparklines/sparkline.js'%}"></script>
+<!-- JQVMap -->
+<script src="{% static 'plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+<!-- daterangepicker -->
+<script src="{% static 'plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+<!-- Summernote -->
+<script src="{% static 'plugins/summernote/summernote-bs4.min.js' %}"></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.js' %}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{% static 'js/pages/dashboard.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'js/demo.js' %}"></script>
+
+{% endblock %}

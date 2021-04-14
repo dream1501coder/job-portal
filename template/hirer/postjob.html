@@ -1,0 +1,100 @@
+{% extends 'hirer/layout/master.html' %}
+{% load static %}
+{% block main %}<br/>
+	<center><h3>Welcome to Freelance Job Portal</h3></center><br/>
+	
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+
+
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><h4>+ Add Project</h4></button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h4 class="modal-title">Add Project Requirement</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+      </div>
+      <div class="modal-body">
+        			<form action="/hirer/postjob" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+			{% csrf_token %}
+			
+			Project Name: <input type="text" class="form-control" name="projectname" placeholder="please enter name">
+
+			Description: <input type="text" class="form-control" name="description" placeholder="please enter Description">
+
+			Budjet: <input type="number" class="form-control" name="amount" placeholder="please enter name">
+
+			Start Time <input type="date" class="form-control" name="start_time" >
+
+			End Time: <input type="date" class="form-control" name="end_time" >
+
+			Front End : <input type="text" class="form-control" name="front_end" placeholder="Add Front-End Technology">
+
+			Back End : <input type="text" class="form-control" name="back_end" placeholder="Add Back-end Technology">
+		<br/>
+			<input type="submit" name="submit" class="btn btn-success" style="width:60%;">
+		</form>
+			<br/><br/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br/>
+<br/>
+<table class="table table-bordered table-stripted table-hover">
+	<thead>
+		<tr>
+			<th>NO.</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Budget</th>
+			<th>Start Time</th>
+			<th>End Time</th>
+			<th>Front end</th>
+			<th>Back end</th>
+			<th>Status</th>
+			<th>Created Time</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for x in project_detail %}
+		
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{x.projectname}}</td>
+			<td>{{x.description}}</td>
+			<td>{{x.amount}}</td>
+			<td>{{x.start_time}}</td>
+			<td>{{x.end_time}}</td>
+			<td>{{x.front_end}}</td>
+			<td>{{x.back_end}}</td>
+			<td>{{x.status}}</td>
+			<td>{{x.create_at}}</td>
+			<td><a href="/hirer/delete_project/{{x.id}}" class="btn btn-danger">Delete</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

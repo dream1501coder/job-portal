@@ -1,0 +1,55 @@
+{% extends 'admin1/layout/master.html' %}
+{% load static %}
+{% block main %}
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" >
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">{% block head %}  {% endblock %}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin1/profile">Home</a></li>
+              <li class="breadcrumb-item active">Project</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+        
+<table class="table table-bordered table-stripted table-hover">
+    <thead>
+        <tr>
+            <th>NO.</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Budget</th>
+            <th>Front end</th>
+            <th>Back end</th>
+            <th>Status</th>
+            <th>Created Time</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for x in project_detail %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{x.projectname}}</td>
+            <td>{{x.description}}</td>
+            <td>{{x.amount}}</td>
+            <td>{{x.front_end}}</td>
+            <td>{{x.back_end}}</td>
+            <td>{{x.status}}</td>
+            <td>{{x.create_at}}</td>
+            <td><a href="/admin1/project_approve/{{x.id}}" class="btn btn-success">Approve</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

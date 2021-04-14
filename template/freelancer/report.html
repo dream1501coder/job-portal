@@ -1,0 +1,43 @@
+{% extends 'freelancer/layout/master.html' %}
+{% load static %}
+{% block main %}
+<br/><br/><br/><br/>
+<br/><br/>
+
+<table class="table table-bordered table-striped table-hover">
+	<thead>
+		<tr>
+			<th>No.:</th>
+			<th>Project Name</th>
+			<th>Bid Rate</th>
+			<th>Comments</th>
+			<th>Status</th>
+			<th>Progress</th>
+			<th>Total Payment</th>
+			<th>Received Payment</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for x in project_bid_detail %}
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{x.project}}</td>
+			<td>{{x.bid_rate}}</td>
+			<td>{{x.comments}}</td>
+			<td>{{x.status}}</td>
+			<td>{{x.progress}}</td>
+			<td>{{x.bid_rate}}</td>
+			<td> {% for y in payment_received_status %}
+                        {% if x.project == y.project %}
+                            {{y.received_amount}}
+                         {% endif %}
+                        {% endfor %}</td>
+<td><a href="/freelancer/bidding_starting_progress/{{x.id}}" class="btn btn-info">Starting</a><a href="/freelancer/bidding_intermediate_progress/{{x.id}}" class="btn btn-warning">Intermediate</a><a href="/freelancer/bidding_mediate_progress/{{x.id}}" class="btn btn-primary">Mediate</a>
+	<a href="/freelancer/bidding_finished_progress/{{x.id}}" class="btn btn-secondary">finished</a>
+	<a href="/freelancer/bidding_completed_progress/{{x.id}}" class="btn btn-success">Completed</a></td></tr>{% endfor %}
+	</tbody>
+</table>
+
+<br/><br/>
+{% endblock %}

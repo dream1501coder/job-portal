@@ -1,0 +1,40 @@
+{% extends 'hirer/layout/master.html' %}
+{% load static %}
+{% block main %}
+
+<br/><br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>No:</th>
+                        <th>Project Name</th>
+                        <th>Freelancer Name</th>
+                        <th>Email</th>
+                        <th>Budget</th>
+                        <th>Progress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for x in profile_bid_rate_detail %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{x.project}}</td>
+                        <td>{{x.user.first_name}}&nbsp;{{x.user.last_name}}</td>
+                        <td>{{x.user.email}}</td>
+                        <td>{{x.bid_rate}}</td>
+                        <td>{{x.progress}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

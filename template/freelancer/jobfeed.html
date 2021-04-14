@@ -1,0 +1,72 @@
+{% extends 'freelancer/layout/master.html' %}
+{% block main %}
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header"><center><H2>Project List</H2></center></div>
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="row">
+           {% for x in job_data %}
+         <div class="col-md-8">
+            <h4>{{x.projectname}} &nbsp;&nbsp;&nbsp;<small style="font-size: 10px;">{{x.create_at}}</small></h4>      
+          <p>{{x.description}}</p>
+          <p>Budget : $ {{x.amount}}</p>
+          <p>Front End : <small>{{x.front_end}}</small> &nbsp;&nbsp;&nbsp; Back End : <small>{{x.back_end}}</small></p>
+
+          <p>Project Start Time : <small>{{x.start_time}}</small> &nbsp;&nbsp;&nbsp; Project End Time : <small>{{x.end_time}}</small></p>
+          
+         </div>
+         <div class="col-md-4">
+         <center>Bidding Process</center>
+         <form action="/freelancer/bidding_rate/{{x.projectname}}" method="POST">
+          {% csrf_token %}
+           <center>
+              <label>Bid Rate:</label>
+               <input type="Number" name="bid_rate" class="form-control" placeholder="Please Enter Your Bidding Rate">
+               <label>Comments</label>
+               <input type="text" name="comment" class="form-control" placeholder="Please Enter Your Comments">
+           </center>
+           <br/> 
+          <center><input type="submit" value="submit" class="btn btn-success"></center>
+         </form>
+         </div>
+        <hr/>
+        {% endfor %}
+        </div>
+      </div>
+   
+    <div class="card-footer"> 
+
+<center>
+  <ul class="pagination">
+  {% if job_data.has_previous  %}
+   <li class="page-item"><a href="?page={{job_data.previous_page_number}}">Previous</a></li>
+  {% endif %}
+   
+   {% for x in job_data.paginator.page_range %}
+    {% if job_data.number == x %}
+        <li class="page-item active">
+          <a href="?page={{x}}">{{x}}</a>
+        </li>
+      {% else %}
+      <li class="page-item">
+        <a href="?page={{x}}">{{x}}</a>
+      </li>
+      {% endif %}  
+    {% endfor %}
+    
+    {% if job_data.has_next  %}
+    <li class="page-item"><a href="?page={{job_data.next_page_number}}">Next</a></li>
+    {% endif %}
+  </ul> 
+</center>
+
+    </div>
+  </div>
+</div>
+
+<br/><br/>
+
+{% endblock %}
