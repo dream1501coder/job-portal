@@ -66,11 +66,11 @@
       <div class="container">
         <div class="row align-items-center" >
           
-          <div class="col-5 col-md-2 col-xl-3  d-block" >
+          <div class="col-5 col-md-2 col-xl-2  d-block" >
             <h1 class="mb-0 site-logo"><a href="/" class="text-black h2 mb-0">Achievers<span class="text-primary">.</span> </a></h1>
           </div>
 
-          <div class="col-10 col-md-12 col-xl-9 main-menu" >
+          <div class="col-10 col-md-12 col-xl-10 main-menu" >
             <nav class="site-navigation position-relative text-right" role="navigation" >
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block ml-0 pl-0" >
@@ -82,7 +82,7 @@
                 </li>
 
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
-                <li><a href="/hirer/login" class="nav-link">Be Hirer</a></li>
+<!--                <li><a href="/hirer/login" class="nav-link">Be Hirer</a></li>-->
 
                 {% if user.is_authenticated %}
                 <li><a href="/jobfeed" class="nav-link">Jobfeed</a></li>
@@ -90,6 +90,7 @@
                 <li><a href="/profile">Profile</a></li>
                 <li><a href="/logout" class="nav-link">logout</a></li>
                 {% else %}
+                <li><a href="/hirer/login" class="nav-link">Be Hirer</a></li>
                 <li><a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a></li>
                 <li><a href="/registration" class="nav-link">Registration</a></li>
                {% endif %}

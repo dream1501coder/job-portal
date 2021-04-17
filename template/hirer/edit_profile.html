@@ -102,6 +102,18 @@
         font-weight: 600;
         color: #0062cc;
     }
+    #update_btn{
+        background: #000046;  /* fallback for old browsers */
+        background: linear-gradient(to right, #000046, #1CB5E0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        border-radius:20px;
+        padding:7px 20px 7px 20px;
+    }
+    #reset_btn{
+        background: #ff416c;
+        background:linear-gradient(to right, #ff416c, #ff4b2b);
+        border-radius:20px;
+        padding:7px 20px 7px 20px;
+    }
 </style>
 
 <div class="container-fluid">
@@ -134,8 +146,8 @@
                             
                             
                             <div class="modal-footer">
-                                <button class="login btn btn-success text-center" type="submit" >Sign Up</button>
-                                <button type="reset" class="btn btn-danger text-center" data-dismiss="modal">Reset</button>
+                                <button class="login btn btn-success text-center" id="update_btn" type="submit" >Update</button>
+                                <button type="reset"  id="reset_btn" class="btn btn-danger text-center" data-dismiss="modal">Reset</button>
                             </div>
                         </form>
                     </div>

@@ -85,7 +85,7 @@
 					<!-- <div class="text-center w-full">
 						<a class="txt1" href="#"  data-toggle="modal" data-target="#myModal2">
 							Create new account
-							<i class="fa fa-long-arrow-right"></i>						
+							<i class="fa fa-long-arrow-right"></i>
 						</a>
 					</div> -->
 				</form>
@@ -108,7 +108,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="/hirer/signup " method="POST" accept-charset="utf-8">
+          <form action="/hirer/signup " method="POST" accept-charset="utf-8" enctype="multipart/form-data">
             {% csrf_token %}
                             First Name : <input type="text" name="fname" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your FIrst Name" aria-describedby="inputGroupPrepend2" required>
 
@@ -120,6 +120,7 @@
                             Confirm Password: <input type="text" name="confirmpassword" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Password" aria-describedby="inputGroupPrepend2" required>
                             
                            Technology : <input type="text" name="technology" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Technology" aria-describedby="inputGroupPrepend2" required>
+                           Image : <input type="file" name="image" class="form-control" id="validationDefaultUsername"  required>
 
                            Phone number : <input type="number" name="phonenumber" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your phonenumber" aria-describedby="inputGroupPrepend2" required>
                            

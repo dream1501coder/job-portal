@@ -15,7 +15,8 @@ def show_profile(request):
 			profile_data = profile.objects.filter(user_id=request.user)
 			return render(request, 'hirer/profile.html', {'profile_data':profile_data})
 		else:
-			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
+			param={"error_login":"Please Check Credentials"}
+			return render(request, 'hirer/login.html', param)
 	else:
 		return redirect('/hirer/login')
 

@@ -113,7 +113,9 @@
     <div class="row">
         <div class="col-md-4">
             <div class="profile-img">
-                <img src="http://127.0.0.1:8000/media/{{x.image}}" alt="{{x.image}}" />
+                <img src="http://127.0.0.1:8000{{x.image}}" alt='{{x.image}}' />
+<!--                <img src=/media/{{i.image}} alt="{{x.image}}" />-->
+
 
             </div>
         </div>
@@ -137,7 +139,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <a href="/freelancer/edit_profile/{{x.user_id.id}}">
+            <a href="/edit_profile/{{x.user_id.id}}">
             <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
             </a>
         </div>

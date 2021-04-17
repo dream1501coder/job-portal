@@ -1,6 +1,6 @@
 {% extends 'freelancer/layout/master.html' %}
 {% block main %}
-<br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/>
 
 <div class="container">
   <div class="card">
@@ -20,7 +20,7 @@
          </div>
          <div class="col-md-4">
          <center>Bidding Process</center>
-         <form action="/freelancer/bidding_rate/{{x.projectname}}" method="POST">
+         <form action="/bidding_rate/{{x.projectname}}" method="POST">
           {% csrf_token %}
            <center>
               <label>Bid Rate:</label>
@@ -30,6 +30,7 @@
            </center>
            <br/> 
           <center><input type="submit" value="submit" class="btn btn-success"></center>
+
          </form>
          </div>
         <hr/>
@@ -70,3 +71,4 @@
 <br/><br/>
 
 {% endblock %}
+</div>

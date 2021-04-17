@@ -18,6 +18,7 @@ def show_profile(request):
 	if len(check_status) == 1:
 		profile_data = profile.objects.filter(user_id=request.user)
 		return render(request, 'freelancer/profile.html',{'profile_data':profile_data})
+		# return HttpResponse(request,profile_data)
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
@@ -40,14 +41,16 @@ def update_profile(request,id):
 			if request.method == 'POST':
 				user = User.objects.filter(id=id).update(username=request.POST['username'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'])
 				hirer_profile=profile.objects.filter(user_id=id).update(phonenumber=request.POST['phonenumber'], address=request.POST['address'], technology=request.POST['technology'], status="Not Active", is_login="freelancer")
-				return redirect('/freelancer/profile')
+				return redirect('/profile')
 			else:
 				profile_data = profile.objects.filter(user_id=id)
-				return render(request, 'freelancer/edit_profile.html', {'profile_data':profile_data})
+				return render(request,  'freelancer/edit_profile.html', {'profile_data':profile_data})
 		else:
 			return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 	else:
 		return render(request, 'freelancer/index.html')
+
+
 
 def jobfeed(request):
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
@@ -86,7 +89,7 @@ def user_signup(request):
 				is_login = "freelancer"
 				profile_data_store = profile(user_id=user, phonenumber=phonenumber, address=address, technology=technology, image=url1, status=status, is_login=is_login)
 				profile_data_store.save()
-				return redirect('/freelancer')
+				return redirect('/')
 		else:
 			return render(request, 'freelancer/index.html' , {'error':'please check password and confirmpassword'})
 	else:
