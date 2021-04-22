@@ -314,12 +314,15 @@ h1, h2, h3, h4, h5,
     .site-navbar .site-navigation .site-menu > li {
       display: inline-block; }
       .site-navbar .site-navigation .site-menu > li > a {
-        padding: 15px 20px;
+        padding: 20px 20px;
+        font-size: 16px;
+         font-weight: 700px;
         color: #000;
         display: inline-block;
         text-decoration: none !important; }
         .site-navbar .site-navigation .site-menu > li > a:hover {
-          color: #4285f4; }
+          color: #4285f4;
+          box-shadow: 20px 20px 30px -10px #64a1b1; }
     .site-navbar .site-navigation .site-menu .has-children {
       position: relative; }
       .site-navbar .site-navigation .site-menu .has-children > a {
