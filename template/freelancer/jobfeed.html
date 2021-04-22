@@ -1,74 +1,140 @@
-{% extends 'freelancer/layout/master.html' %}
-{% block main %}
+{% extends 'freelancer/layout/master.html' %} {% block main %}
 <br/><br/><br/><br/>
 
 <div class="container">
-  <div class="card">
-    <div class="card-header"><center><H2>Project List</H2></center></div>
-    <div class="card-body">
-      <div class="container-fluid">
-        <div class="row">
-           {% for x in job_data %}
-         <div class="col-md-8">
-            <h4>{{x.projectname}} &nbsp;&nbsp;&nbsp;<small style="font-size: 10px;">{{x.create_at}}</small></h4>      
-          <p>{{x.description}}</p>
-          <p>Budget : $ {{x.amount}}</p>
-          <p>Front End : <small>{{x.front_end}}</small> &nbsp;&nbsp;&nbsp; Back End : <small>{{x.back_end}}</small></p>
+    <div class="card">
+        <div class="card-header d-sm-inline-flex">
 
-          <p>Project Start Time : <small>{{x.start_time}}</small> &nbsp;&nbsp;&nbsp; Project End Time : <small>{{x.end_time}}</small></p>
-          
-         </div>
-         <div class="col-md-4">
-         <center>Bidding Process</center>
-         <form action="/bidding_rate/{{x.projectname}}" method="POST">
-          {% csrf_token %}
-           <center>
-              <label>Bid Rate:</label>
-               <input type="Number" name="bid_rate" class="form-control" placeholder="Please Enter Your Bidding Rate">
-               <label>Comments</label>
-               <input type="text" name="comment" class="form-control" placeholder="Please Enter Your Comments">
-           </center>
-           <br/> 
-          <center><input type="submit" value="submit" class="btn btn-success"></center>
-
-         </form>
-         </div>
-        <hr/>
-        {% endfor %}
+            <H2 class="col-md-8">Project List</H2>
+            <form action="/search" method="GET">
+                <input type="text" name="search" id="search" class="form-control border-primary float-lg-right search" placeholder="search projects..">
+                <!-- <a href="search"><i class="btn btn-primary btn-sm fa fa-search"> </i></a> -->
+            </form>
         </div>
-      </div>
-   
-    <div class="card-footer"> 
+        <div class="card-body">
+            <div class="container-fluid">
+                <div class="row">
 
-<center>
-  <ul class="pagination">
-  {% if job_data.has_previous  %}
-   <li class="page-item"><a href="?page={{job_data.previous_page_number}}">Previous</a></li>
-  {% endif %}
-   
-   {% for x in job_data.paginator.page_range %}
-    {% if job_data.number == x %}
-        <li class="page-item active">
-          <a href="?page={{x}}">{{x}}</a>
-        </li>
-      {% else %}
-      <li class="page-item">
-        <a href="?page={{x}}">{{x}}</a>
-      </li>
-      {% endif %}  
-    {% endfor %}
-    
-    {% if job_data.has_next  %}
-    <li class="page-item"><a href="?page={{job_data.next_page_number}}">Next</a></li>
-    {% endif %}
-  </ul> 
-</center>
 
+                    {% for x in job_data %}
+
+                    <div class="col-md-8">
+                        <h4>{{x.projectname}} &nbsp;&nbsp;&nbsp;<small style="font-size: 10px;">{{x.create_at}}</small></h4>
+                        <p>{{x.description}}</p>
+                        <p>Budget : $ {{x.amount}}</p>
+                        <p>Front End : <small>{{x.front_end}}</small> &nbsp;&nbsp;&nbsp; Back End : <small>{{x.back_end}}</small></p>
+
+                        <p>Project Start Time : <small>{{x.start_time}}</small> &nbsp;&nbsp;&nbsp; Project End Time : <small>{{x.end_time}}</small></p>
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <center>Bidding Process</center>
+                        <form action="/bidding_rate/{{x.projectname}}" method="POST">
+                            {% csrf_token %}
+                            <center>
+                                <label>Bid Rate:</label>
+                                <input type="Number" name="bid_rate" class="form-control" placeholder="Please Enter Your Bidding Rate">
+                                <label>Comments</label>
+                                <input type="text" name="comment" class="form-control" placeholder="Please Enter Your Comments">
+                            </center>
+                            <center><input type="submit" value="submit" class="btn btn-success mt-1"></center>
+
+                        </form>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card-footer">
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if job_data.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{job_data.previous_page_number}}">Previous</a></li>
+                        {% endif %} {% for x in job_data.paginator.page_range %} {% if job_data.number == x %}
+                        <li class="page-item active">
+                            <a href="?page={{x}}" class="page-link">{{x}}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a href="?page={{x}}" class="page-link">{{x}}</a>
+                        </li>
+                        {% endif %} {% endfor %} {% if job_data.has_next %}
+                        <li class="page-item"><a href="?page={{job_data.next_page_number}}" class="page-link">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+        <!-- 
+        <div class="card-body">
+            <div class="container">
+                <table class="table table-avatar">
+                    <tbody>
+                        {% for x in job_data %}
+                        <tr>
+                            <div class="row">
+                                <div class="col-md-8" style="border: solid;">
+                                    <td>
+                                        <h4>{{x.projectname}} &nbsp;&nbsp;&nbsp;<small style="font-size: 10px;">{{x.create_at}}</small></h4>
+                                        <p>{{x.description}}</p>
+                                        <p>Budget : $ {{x.amount}}</p>
+                                        <p>Front End : <small>{{x.front_end}}</small> &nbsp;&nbsp;&nbsp; Back End : <small>{{x.back_end}}</small></p>
+
+                                        <p>Project Start Time : <small>{{x.start_time}}</small> &nbsp;&nbsp;&nbsp; Project End Time : <small>{{x.end_time}}</small></p>
+                                    </td>
+                                </div>
+                                <div class="col-md-4">
+                                    <td>
+                                        <center>Bidding Process</center>
+                                        <form action="/bidding_rate/{{x.projectname}}" method="POST">
+                                            {% csrf_token %}
+                                            <center>
+                                                <label>Bid Rate:</label>
+                                                <input type="Number" name="bid_rate" class="form-control" placeholder="Please Enter Your Bidding Rate">
+                                                <label>Comments</label>
+                                                <input type="text" name="comment" class="form-control" placeholder="Please Enter Your Comments">
+                                            </center>
+                                            <center><input type="submit" value="submit" class="btn btn-success mt-1"></center>
+
+                                        </form>
+
+                                    </td>
+                                </div>
+                            </div>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer">
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% if job_data.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{job_data.previous_page_number}}">Previous</a></li>
+                    {% endif %} {% for x in job_data.paginator.page_range %} {% if job_data.number == x %}
+                    <li class="page-item active">
+                        <a href="?page={{x}}" class="page-link">{{x}}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a href="?page={{x}}" class="page-link">{{x}}</a>
+                    </li>
+                    {% endif %} {% endfor %} {% if job_data.has_next %}
+                    <li class="page-item"><a href="?page={{job_data.next_page_number}}" class="page-link">Next</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        </div> -->
     </div>
-  </div>
 </div>
 
-<br/><br/>
-
-{% endblock %}
+<br/><br/> {% endblock %}
 </div>

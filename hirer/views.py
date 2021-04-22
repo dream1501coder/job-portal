@@ -48,6 +48,8 @@ def update_profile(request,id):
 			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
 	else:
 		return redirect('/hirer/login')
+
+
 def freelancelist(request):
 	if request.user.is_authenticated:
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
@@ -119,6 +121,9 @@ def project_biding_rate(request):
 	else:
 		return redirect('/hirer/login')
 
+
+
+
 def paystatus(request):
 	if request.user.is_authenticated:
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
@@ -131,23 +136,12 @@ def paystatus(request):
 	else:
 		return redirect('/hirer/login')
 
-# def workstatus(request):
-# 	if request.user.is_authenticated:
-# 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
-# 		if len(check_status) == 1:
-# 			profile_bid_rate_detail = project_bid_rate.objects.filter(user__username=request.user)
-# 			profile_data = profile.objects.filter(user_id=request.user)
-# 			return render(request, 'hirer/workstatus.html', {'profile_data':profile_data, 'profile_bid_rate_detail':profile_bid_rate_detail})
-# 		else:
-# 			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
-# 	else:
-# 		return redirect('/hirer/login')
-
 
 def workstatus(request):
 	if request.user.is_authenticated:
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
 		if len(check_status) == 1:
+			
 			profile_data = add_project.objects.filter(user_id=request.user)
 			if len(profile_data)==0:
 				profile_bid_rate_detail=''
@@ -162,6 +156,8 @@ def workstatus(request):
 			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
 	else:
 		return redirect('/hirer/login')
+
+		
 def login(request):
 	if request.method == 'POST':
 		username = request.POST['username']

@@ -21,6 +21,7 @@ urlpatterns = [
     path('bidding_finished_progress/<int:id>', views.bidding_finished_progress),
     path('bidding_completed_progress/<int:id>', views.bidding_completed_progress),
     path('registration', views.registration),
+    path('search', views.search),
     
     
     

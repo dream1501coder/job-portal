@@ -12,6 +12,35 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
 	return render(request, 'freelancer/index.html')
 
+def searchMatch(query,item):
+	# return true  only if query matches the item
+	if query in item.front_end.lower() or query in item.back_end.lower():
+		return True
+	else:
+		return False
+
+def search(request):
+	query = request.GET.get('search')
+	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
+	if len(check_status) == 1:
+		all_data1 =add_project.objects.filter(status="Approved").order_by('-create_at')
+		all_data = [item for item in all_data1 if searchMatch(query,item)]
+	
+		# if len(all_data)!=0:
+		# 	paginator = Paginator(all_data, 4)
+		# 	page = request.GET.get('page')
+		# 	try:
+		# 		all_data = paginator.page(page)
+		# 	except PageNotAnInteger:
+		# 		all_data = paginator.page(1)
+		# 	except EmptyPage:
+		# 		all_data = paginator.page(paginator.num_pages)
+		return render(request, 'freelancer/search.html',{'job_data':all_data,'keyword':query})
+		
+		# return render(request, 'freelancer/search.html',{'job_data':"No Results Found",'keyword':query})
+	else:
+		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
+
 
 def show_profile(request):
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
@@ -39,7 +68,8 @@ def update_profile(request,id):
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 		if len(check_status) == 1:
 			if request.method == 'POST':
-				user = User.objects.filter(id=id).update(username=request.POST['username'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'])
+				user = User.objects.filter(id=id).update(username=request.POST['username'],password=request.POST['password'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'])
+
 				hirer_profile=profile.objects.filter(user_id=id).update(phonenumber=request.POST['phonenumber'], address=request.POST['address'], technology=request.POST['technology'], status="Not Active", is_login="freelancer")
 				return redirect('/profile')
 			else:
@@ -56,7 +86,10 @@ def jobfeed(request):
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 	if len(check_status) == 1:
 		all_data =add_project.objects.filter(status="Approved").order_by('-create_at')
-		paginator = Paginator(all_data, 5)
+		# all_data = project_bid_rate.objects.filter(status="Not Approved")
+
+		# private_galleries = add_project.objects.filter(status="Approved").filter(root_gallery__isnull = True).exclude(id__in = [x.gallery.id for x in user_galleries])
+		paginator = Paginator(all_data, 4)
 		page = request.GET.get('page')
 		try:
 			all_data = paginator.page(page)
@@ -65,6 +98,16 @@ def jobfeed(request):
 		except EmptyPage:
 			all_data = paginator.page(paginator.num_pages)
 		return render(request, 'freelancer/jobfeed.html',{'job_data':all_data})
+	else:
+		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
+
+
+def report(request):
+	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
+	if len(check_status) == 1:
+		project_bid_detail = project_bid_rate.objects.filter(user=request.user)
+		payment_received_status = payment_report.objects.all()
+		return render(request, 'freelancer/report.html',{'project_bid_detail':project_bid_detail, 'payment_received_status':payment_received_status})
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
@@ -132,14 +175,6 @@ def bidding_rate(request, id):
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
-def report(request):
-	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
-	if len(check_status) == 1:
-		project_bid_detail = project_bid_rate.objects.filter(user=request.user)
-		payment_received_status = payment_report.objects.all()
-		return render(request, 'freelancer/report.html',{'project_bid_detail':project_bid_detail, 'payment_received_status':payment_received_status})
-	else:
-		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
 def bidding_starting_progress(request,id):
 
