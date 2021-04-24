@@ -100,13 +100,11 @@ def delete_project(request,id):
 
 
 def project_biding_rate(request):
-
 	if request.user.is_authenticated:
-
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
-		if len(check_status) == 1:
-			
+		if len(check_status) == 1:			
 			profile_bid_rate_detail = project_bid_rate.objects.all()
+			all_project = []
 			for x in profile_bid_rate_detail:
 				project_name = add_project.objects.filter(user_id=request.user)
 				for y in project_name:

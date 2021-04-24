@@ -1,467 +1,516 @@
-{% extends 'freelancer/layout/master.html' %}
-{% load static %}
-{% block main %}
+{% extends 'freelancer/layout/master.html' %} {% load static %} {% block main %}
 
-    <div class="site-blocks-cover" style="overflow: hidden;">
-      <div class="container">
+<div class="site-blocks-cover" style="overflow: hidden;">
+    <div class="container">
         <div class="row align-items-center justify-content-center">
 
-          <div class="col-md-12" style="position: relative;" data-aos="fade-up" data-aos-delay="200">
-            
-            <img src="{% static 'images/undraw_investing_7u74.svg' %}" alt="Image" class="img-fluid img-absolute">
+            <div class="col-md-12" style="position: relative;" data-aos="fade-up" data-aos-delay="200">
 
-            <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
-              <div class="col-lg-6 mr-auto">
-                <h1>Make Your Business More Profitable and secure</h1>
-                <p class="mb-5">Freelancing jobportal is one of best and 100% geniune freelancer site.</p>
-                <div>
-                  <a href="#" class="btn btn-primary mr-2 mb-2">Get Started</a>
+                <img src="{% static 'images/undraw_investing_7u74.svg' %}" alt="Image" class="img-fluid img-absolute">
+
+                <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-6 mr-auto">
+                        <h1>Make Your Business More Profitable and secure</h1>
+                        <p class="mb-5">Freelancing jobportal is one of best and 100% geniune freelancer site.</p>
+                        <div>
+                            <a href="#" class="btn btn-primary mr-2 mb-2">Get Started</a>
+                        </div>
+                    </div>
+
+
                 </div>
-              </div>
-              
-              
+
             </div>
-
-          </div>
         </div>
-      </div>
-    </div>  
+    </div>
+</div>
 
 
-    <div class="site-section" id="features-section">
-      <div class="container">
-        <div class="row mb-5 justify-content-center text-center"  data-aos="fade-up">
-          <div class="col-7 text-center  mb-5">
-            <h2 class="section-title">Achievers</h2>
-            <p class="lead">Best online job portal are tied up with the top companies to give the best job to the potential candidates. Candidates always look for the best recruiters.</p>
-          </div>
+<div class="site-section" id="project-section">
+    <div class="container">
+        <div class="row mb-5 justify-content-center text-center" data-aos="fade-up">
+            <div class="col-7 text-center  mb-5">
+                <h2 class="section-title">Projects</h2>
+                <p class="lead">Best online job portal are tied up with the top companies to give the best job to the potential candidates. Candidates always look for the best recruiters.</p>
+            </div>
         </div>
         <div class="row align-items-stretch">
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
-            
-            <div class="unit-4 d-block">
-              <div class="unit-4-icon mb-3">
-                <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/android.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
-              </div>
-              <div>
-                <h3>Android Software Development</h3>
-                <p>Android software development is the process by which new applications are created for devices running the Android operating system.</p>
-              </div>
+            {% for x in job_data %}
+            <div class="col-md-4 col-lg-3 mb-4 mb-lg-4" data-aos="fade-up">
+
+                <div class="unit-4 d-block">
+                    <div class="unit-4-icon mb-3">
+                        <!-- <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/android.png' %}" alt="Image" class="img-fluid rounded-circle"></span> -->
+                        <span class="icon-wrap pt-3" backgroundcolor="#F0FFFF" style="color: black; font-size: 30px; font-weight: bolder;">{{forloop.counter}}</span>
+                    </div>
+                    <div>
+                        <h3>Name : {{x.projectname}}</h3>
+                        <p>Front-end : {{x.front_end}}</p>
+                        <p>Back-end : {{x.back_end}}</p>
+                    </div>
+                </div>
+
+            </div>
+            {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+        </div>
+        <div class="row align-items-stretch">
+            {% endif %} {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="site-section" id="features-section">
+    <div class="container">
+        <div class="row mb-5 justify-content-center text-center" data-aos="fade-up">
+            <div class="col-7 text-center  mb-5">
+                <h2 class="section-title">Achievers</h2>
+                <p class="lead">Best online job portal are tied up with the top companies to give the best job to the potential candidates. Candidates always look for the best recruiters.</p>
+            </div>
+        </div>
+        <div class="row align-items-stretch">
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
+
+                <div class="unit-4 d-block">
+                    <div class="unit-4-icon mb-3">
+                        <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/android.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
+                    </div>
+                    <div>
+                        <h3>Android Software Development</h3>
+                        <p>Android software development is the process by which new applications are created for devices running the Android operating system.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="unit-4 d-block">
+                    <div class="unit-4-icon mb-3">
+                        <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/brain.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
+                    </div>
+                    <div>
+                        <h3>Artificial Intelligence</h3>
+                        <p>AI is everywhere today, from your smartphones to your cars to your home to your banking establishment.Some languages are Kotlin, Java, and C++ used in Android SDK</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="unit-4 d-block">
+                    <div class="unit-4-icon mb-3">
+                        <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/ml.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
+                    </div>
+                    <div>
+                        <h3>Machine Learning</h3>
+                        <p>Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to perform a specific task without using explicit instructions, relying on patterns and inference instead.</p>
+                    </div>
+                </div>
             </div>
 
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
 
-            <div class="unit-4 d-block">
-              <div class="unit-4-icon mb-3">
-                <span class="icon-wrap"backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/brain.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
-              </div>
-              <div>
-                <h3>Artificial Intelligence</h3>
-                <p>AI is everywhere today, from your smartphones to your cars to your home to your banking establishment.Some  languages are Kotlin, Java, and C++ used in Android SDK</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up"  data-aos-delay="200">
-            <div class="unit-4 d-block">
-              <div class="unit-4-icon mb-3">
-                <span class="icon-wrap"backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/ml.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
-              </div>
-              <div>
-                <h3>Machine Learning</h3>
-                <p>Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to perform a specific task without using explicit instructions, relying on patterns and inference instead.</p>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
-            <div class="unit-4 d-block">
-              <div class="unit-4-icon mb-3">
-                <span class="icon-wrap"backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/smartphone.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
-              </div>
-              <div>
-                <h3>Internet of Things(IoT)</h3>
-                <p>IoT essentially is connecting many devices and creating a virtual network where everything works seamlessly via a single monitoring center of sorts.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="unit-4 d-block">
-              <div class="unit-4-icon mb-3">
-                <span class="icon-wrap"backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/analysis.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
-              </div>
-              <div>
-                <h3>Data Science</h3>
-                <p>Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.It is related to data mining and big data.</p>
-              </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
+                <div class="unit-4 d-block">
+                    <div class="unit-4-icon mb-3">
+                        <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/smartphone.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
+                    </div>
+                    <div>
+                        <h3>Internet of Things(IoT)</h3>
+                        <p>IoT essentially is connecting many devices and creating a virtual network where everything works seamlessly via a single monitoring center of sorts.</p>
+                    </div>
+                </div>
             </div>
 
-            
-          </div>
-          
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="unit-4 d-block">
-              <div class="unit-4-icon mb-3">
-                <span class="icon-wrap"backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/vector.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
-              </div>
-              <div>
-                <h3>Graphic Designing</h3>
-                <p>Graphic designers create and combine symbols, images and text to form visual representations of ideas and messages.The field is considered a subset of visual communication and communication design</p>
-              </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="unit-4 d-block">
+                    <div class="unit-4-icon mb-3">
+                        <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/analysis.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
+                    </div>
+                    <div>
+                        <h3>Data Science</h3>
+                        <p>Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.It is related to data mining and big data.</p>
+                    </div>
+                </div>
+
+
             </div>
-          </div>
+
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="unit-4 d-block">
+                    <div class="unit-4-icon mb-3">
+                        <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/vector.png' %}" alt="Image" class="img-fluid rounded-circle"></span>
+                    </div>
+                    <div>
+                        <h3>Graphic Designing</h3>
+                        <p>Graphic designers create and combine symbols, images and text to form visual representations of ideas and messages.The field is considered a subset of visual communication and communication design</p>
+                    </div>
+                </div>
+            </div>
 
         </div>
-      </div>
     </div>
-    
-    <div class="feature-big">
-      <div class="container">
+</div>
+
+<div class="feature-big">
+    <div class="container">
         <div class="row mb-5 site-section">
-          <div class="col-lg-7" data-aos="fade-right">
-            <img src="{% static 'images/undraw_gift_card_6ekc.svg' %}" alt="Image" class="img-fluid">
-          </div>
-          <div class="col-lg-5 pl-lg-5 ml-auto mt-md-5">
-            <h2 class="text-black">Understanding Its Importance</h2>
-            <p class="mb-4">The qualified job seekers search for a place where they can apply their knowledge and skills to burgeon in the professional sector. On the other hand, the recruiters also look for the candidates that possess the right talent, qualification, aptitude, and efficiency that can fulfill the vacancy.In simpler words, it is the platform where the job seekers, whether fresher or experienced, and employers meet to fulfill each other’s requirements.</p>
-            
-            <div class="author-box" data-aos="fade-left">
-              <div class="d-flex mb-4">
-                <div class="mr-3">
-                  <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid rounded-circle">
-                </div>
-                <div class="mr-auto text-black">
-                  <strong class="font-weight-bold mb-0">Mit Bhavsar</strong> <br>
-                  President, Company.
-                </div>
-              </div>
-              <blockquote>&ldquo;“User experience is everything. It always has been, but it’s undervalued and underinvested in. If you don’t know user-centered design, study it. Hire people who know it. Obsess over it. Live and breathe it. Get your whole company on board.”&rdquo;</blockquote>
+            <div class="col-lg-7" data-aos="fade-right">
+                <img src="{% static 'images/undraw_gift_card_6ekc.svg' %}" alt="Image" class="img-fluid">
             </div>
-          </div>
+            <div class="col-lg-5 pl-lg-5 ml-auto mt-md-5">
+                <h2 class="text-black">Understanding Its Importance</h2>
+                <p class="mb-4">The qualified job seekers search for a place where they can apply their knowledge and skills to burgeon in the professional sector. On the other hand, the recruiters also look for the candidates that possess the right talent, qualification,
+                    aptitude, and efficiency that can fulfill the vacancy.In simpler words, it is the platform where the job seekers, whether fresher or experienced, and employers meet to fulfill each other’s requirements.</p>
+
+                <div class="author-box" data-aos="fade-left">
+                    <div class="d-flex mb-4">
+                        <div class="mr-3">
+                            <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="mr-auto text-black">
+                            <strong class="font-weight-bold mb-0">Mit Bhavsar</strong> <br> President, Company.
+                        </div>
+                    </div>
+                    <blockquote>&ldquo;“User experience is everything. It always has been, but it’s undervalued and underinvested in. If you don’t know user-centered design, study it. Hire people who know it. Obsess over it. Live and breathe it. Get your whole company
+                        on board.”&rdquo;</blockquote>
+                </div>
+            </div>
         </div>
 
         <div class="mt-5 row mb-5 site-section ">
-          <div class="col-lg-7 order-1 order-lg-2" data-aos="fade-left">
-            <img src="{% static 'images/undraw_metrics_gtu7.svg' %}" alt="Image" class="img-fluid">
-          </div>
-          <div class="col-lg-5 pr-lg-5 mr-auto mt-5 order-2 order-lg-1">
-            <h2 class="text-black">Quality Service</h2>
-            <p class="mb-4">Quality employment portals provide better results and satisfaction by resume writing services and uploading it as per requirement. Provides regular job alerts to the job seekers.  Selecting the right job portal is essential because it gives the surety of the job vacancies not being forged.</p>
-            
-            
-
-            <div class="author-box" data-aos="fade-right">
-              <div class="d-flex mb-4">
-                <div class="mr-3">
-                  <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid rounded-circle">
-                </div>
-                <div class="mr-auto text-black">
-                  <strong class="font-weight-bold mb-0">Hrutvik Barot</strong> <br>
-                  CEO, Company.
-                </div>
-              </div>
-              <blockquote>&ldquo;“Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do.”&rdquo;</blockquote>
+            <div class="col-lg-7 order-1 order-lg-2" data-aos="fade-left">
+                <img src="{% static 'images/undraw_metrics_gtu7.svg' %}" alt="Image" class="img-fluid">
             </div>
-          </div>
+            <div class="col-lg-5 pr-lg-5 mr-auto mt-5 order-2 order-lg-1">
+                <h2 class="text-black">Quality Service</h2>
+                <p class="mb-4">Quality employment portals provide better results and satisfaction by resume writing services and uploading it as per requirement. Provides regular job alerts to the job seekers. Selecting the right job portal is essential because it gives
+                    the surety of the job vacancies not being forged.</p>
+
+
+
+                <div class="author-box" data-aos="fade-right">
+                    <div class="d-flex mb-4">
+                        <div class="mr-3">
+                            <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="mr-auto text-black">
+                            <strong class="font-weight-bold mb-0">Hrutvik Barot</strong> <br> CEO, Company.
+                        </div>
+                    </div>
+                    <blockquote>&ldquo;“Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do.”&rdquo;</blockquote>
+                </div>
+            </div>
         </div>
 
         <div class="row mb-5 site-section">
-          <div class="col-lg-7" data-aos="fade-right">
-            <img src="{% static 'images/undraw_gift_card_6ekc.svg' %}" alt="Image" class="img-fluid">
-          </div>
-          <div class="col-lg-5 pl-lg-5 ml-auto mt-md-5">
-            <h2 class="text-black">Free or Paid</h2>
-            <p class="mb-4">Many people don’t pay to the job portals as they are not financially set especially if they are fresher’s. But at the same time experienced candidates pay due to quality service of the recruitment portal. Many portals are paid by the recruiters company if they help them in hiring a good candidate.</p>
-            
-            <div class="author-box" data-aos="fade-left">
-              <div class="d-flex mb-4">
-                <div class="mr-3">
-                  <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid rounded-circle">
-                </div>
-                <div class="mr-auto text-black">
-                  <strong class="font-weight-bold mb-0">Mit Bhavsar</strong> <br>
-                  CEO, Company.
-                </div>
-              </div>
-              <blockquote>&ldquo; "Starting your own business is like riding a roller coaster. There are highs and lows and every turn you take is another twist. The lows are really low, but the highs can be really high. You have to be strong, keep your stomach tight, and ride along with the roller coaster that you started."&rdquo;</blockquote>
+            <div class="col-lg-7" data-aos="fade-right">
+                <img src="{% static 'images/undraw_gift_card_6ekc.svg' %}" alt="Image" class="img-fluid">
             </div>
-          </div>
+            <div class="col-lg-5 pl-lg-5 ml-auto mt-md-5">
+                <h2 class="text-black">Free or Paid</h2>
+                <p class="mb-4">Many people don’t pay to the job portals as they are not financially set especially if they are fresher’s. But at the same time experienced candidates pay due to quality service of the recruitment portal. Many portals are paid by the recruiters
+                    company if they help them in hiring a good candidate.</p>
+
+                <div class="author-box" data-aos="fade-left">
+                    <div class="d-flex mb-4">
+                        <div class="mr-3">
+                            <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="mr-auto text-black">
+                            <strong class="font-weight-bold mb-0">Mit Bhavsar</strong> <br> CEO, Company.
+                        </div>
+                    </div>
+                    <blockquote>&ldquo; "Starting your own business is like riding a roller coaster. There are highs and lows and every turn you take is another twist. The lows are really low, but the highs can be really high. You have to be strong, keep your stomach
+                        tight, and ride along with the roller coaster that you started."&rdquo;</blockquote>
+                </div>
+            </div>
         </div>
 
         <div class="mt-5 row mb-5 site-section ">
-          <div class="col-lg-7 order-1 order-lg-2" data-aos="fade-left">
-            <img src="{% static 'images/undraw_metrics_gtu7.svg' %}" alt="Image" class="img-fluid">
-          </div>
-          <div class="col-lg-5 pr-lg-5 mr-auto mt-5 order-2 order-lg-1">
-            <h2 class="text-black">Easy Registration</h2>
-            <p class="mb-4">No recruiter or a job seeker wants to fool around and tick each dialogue box with the silly details. The registration procedure shouldn’t be complicated because no candidate would like going through various steps just to confirm his enrollment. Thus, an easy registration is widely preferred by all job seekers.</p>
-            
-            
-
-            <div class="author-box" data-aos="fade-right">
-              <div class="d-flex mb-4">
-                <div class="mr-3">
-                  <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid rounded-circle">
-                </div>
-                <div class="mr-auto text-black">
-                  <strong class="font-weight-bold mb-0">Hrutvik Barot</strong> <br>
-                  CEO, Company.
-                </div>
-              </div>
-              <blockquote>&ldquo;"I made a resolve then that I was going to amount to something if I could. And no hours, nor amount of labor, nor amount of money would deter me from giving the best that there was in me. And I have done that ever since, and I win by it. I know."&rdquo;</blockquote>
+            <div class="col-lg-7 order-1 order-lg-2" data-aos="fade-left">
+                <img src="{% static 'images/undraw_metrics_gtu7.svg' %}" alt="Image" class="img-fluid">
             </div>
-          </div>
+            <div class="col-lg-5 pr-lg-5 mr-auto mt-5 order-2 order-lg-1">
+                <h2 class="text-black">Easy Registration</h2>
+                <p class="mb-4">No recruiter or a job seeker wants to fool around and tick each dialogue box with the silly details. The registration procedure shouldn’t be complicated because no candidate would like going through various steps just to confirm his enrollment.
+                    Thus, an easy registration is widely preferred by all job seekers.</p>
+
+
+
+                <div class="author-box" data-aos="fade-right">
+                    <div class="d-flex mb-4">
+                        <div class="mr-3">
+                            <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="mr-auto text-black">
+                            <strong class="font-weight-bold mb-0">Hrutvik Barot</strong> <br> CEO, Company.
+                        </div>
+                    </div>
+                    <blockquote>&ldquo;"I made a resolve then that I was going to amount to something if I could. And no hours, nor amount of labor, nor amount of money would deter me from giving the best that there was in me. And I have done that ever since, and
+                        I win by it. I know."&rdquo;</blockquote>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
+</div>
 
 
-    <div class="site-section bg-light" id="about-section">
-      <div class="container">
+<div class="site-section bg-light" id="about-section">
+    <div class="container">
         <div class="row mb-5">
-          <div class="col-12 text-center">
-            <h2 class="section-title mb-3">About Us</h2>
-          </div>
+            <div class="col-12 text-center">
+                <h2 class="section-title mb-3">About Us</h2>
+            </div>
         </div>
         <div class="row mb-5">
-          <div class="col-lg-6" data-aos="fade-right">
-            <img src="{% static 'images/undraw_bookmarks_r6up.svg' %}" alt="Image" class="img-fluid">
-          </div>
-          <div class="col-lg-5 ml-auto pl-lg-5">
-            <h2 class="text-black mb-4 h3 font-weight-bold"></h2>
-            <p class="mb-4">Freelancer is a marketplace where employers and employees are able to find each other. The site allows employers to post work for site members while bidding on in a competitive tender process. The site also allows members to host and enter contests for which prize money is offered as a reward. Freelancers and employers develop profiles on the site as they offer, win and complete work and write and receive reviews of people they work with or for. The site's members receive a finite number of bids to use on the site, which are periodically replenished. A series of account options are offered, ranging from free accounts through to professional subscriptions.</p>
-            <ul class="ul-check mb-5 list-unstyled success">
-              <li>Assurance of completing task in time.</li>
-              <li>Assurance of payment to both freelancer and company</li>
-              <li>Assrance of getting valuable work</li>
-            </ul>
-          </div>
+            <div class="col-lg-6" data-aos="fade-right">
+                <img src="{% static 'images/undraw_bookmarks_r6up.svg' %}" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-lg-5 ml-auto pl-lg-5">
+                <h2 class="text-black mb-4 h3 font-weight-bold"></h2>
+                <p class="mb-4">Freelancer is a marketplace where employers and employees are able to find each other. The site allows employers to post work for site members while bidding on in a competitive tender process. The site also allows members to host and enter
+                    contests for which prize money is offered as a reward. Freelancers and employers develop profiles on the site as they offer, win and complete work and write and receive reviews of people they work with or for. The site's members receive
+                    a finite number of bids to use on the site, which are periodically replenished. A series of account options are offered, ranging from free accounts through to professional subscriptions.</p>
+                <ul class="ul-check mb-5 list-unstyled success">
+                    <li>Assurance of completing task in time.</li>
+                    <li>Assurance of payment to both freelancer and company</li>
+                    <li>Assrance of getting valuable work</li>
+                </ul>
+            </div>
         </div>
 
-        
-      </div>
+
     </div>
+</div>
 
-    <!-- <div class="site-section" id="our-team-section">
-      <div class="container">
-        <div class="row mb-5 justify-content-center text-center"  data-aos="fade-up">
-          <div class="col-7 text-center  mb-5">
-            <h2 class="section-title">Our Team</h2>
-          </div>
+<!-- <div class="site-section" id="our-team-section">
+    <div class="container">
+        <div class="row mb-5 justify-content-center text-center" data-aos="fade-up">
+            <div class="col-7 text-center  mb-5">
+                <h2 class="section-title">Our Team</h2>
+            </div>
         </div>
-       
+
         <div class="row">
 
-          <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="person">
-              <div class="bio-img">
-                <figure>
-                  <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid">
-                </figure>
-                <div class="social">
-                  <a href="#"><span class="icon-facebook"></span></a>
-                  <a href="#"><span class="icon-twitter"></span></a>
-                  <a href="#"><span class="icon-instagram"></span></a>
-                </div>
-              </div>
-              <h2 class="text-black h1">Mit Bhavsar</h2>
-              <span class="sub-title d-block mb-3">President</span>
-              <p> “To me, business isn’t about wearing suits or pleasing stockholders. It’s about being true to yourself, your ideas and focusing on the essentials.”</p>
-            </div>
-          </div>
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="person">
-              <div class="bio-img">
-                <figure>
-                  <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid">
-                </figure>
-                <div class="social">
-                  <a href="#"><span class="icon-facebook"></span></a>
-                  <a href="#"><span class="icon-twitter"></span></a>
-                  <a href="#"><span class="icon-instagram"></span></a>
+                <div class="person">
+                    <div class="bio-img">
+                        <figure>
+                            <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid">
+                        </figure>
+                        <div class="social">
+                            <a href="#"><span class="icon-facebook"></span></a>
+                            <a href="#"><span class="icon-twitter"></span></a>
+                            <a href="#"><span class="icon-instagram"></span></a>
+                        </div>
+                    </div>
+                    <h2 class="text-black h1">Mit Bhavsar</h2>
+                    <span class="sub-title d-block mb-3">President</span>
+                    <p> “To me, business isn’t about wearing suits or pleasing stockholders. It’s about being true to yourself, your ideas and focusing on the essentials.”</p>
                 </div>
-              </div>
-              <h2 class="text-black h1">Parth Champaneri</h2>
-              <span class="sub-title d-block mb-3">Marketing</span>
-              <p>“Many companies have forgotten they sell to actual people. Humans care about the entire experience, not just the marketing or sales or service. To really win in the modern age, you must solve for humans.”</p>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
-            <div class="person">
-              <div class="bio-img">
-                <figure>
-                  <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid">
-                </figure>
-                <div class="social">
-                  <a href="#"><span class="icon-facebook"></span></a>
-                  <a href="#"><span class="icon-twitter"></span></a>
-                  <a href="#"><span class="icon-instagram"></span></a>
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="person">
+                    <div class="bio-img">
+                        <figure>
+                            <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid">
+                        </figure>
+                        <div class="social">
+                            <a href="#"><span class="icon-facebook"></span></a>
+                            <a href="#"><span class="icon-twitter"></span></a>
+                            <a href="#"><span class="icon-instagram"></span></a>
+                        </div>
+                    </div>
+                    <h2 class="text-black h1">Parth Champaneri</h2>
+                    <span class="sub-title d-block mb-3">Marketing</span>
+                    <p>“Many companies have forgotten they sell to actual people. Humans care about the entire experience, not just the marketing or sales or service. To really win in the modern age, you must solve for humans.”</p>
                 </div>
-              </div>
-              <h2 class="text-black h1">Austin Christian</h2>
-              <span class="sub-title d-block mb-3">Financing</span>
-              <p>“I will tell you the secret to getting rich on Wall Street. You try to be greedy when others are fearful. And you try to be fearful when others are greedy.”</p>
             </div>
-          </div>
 
-          <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="person">
-              <div class="bio-img">
-                <figure>
-                  <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid">
-                </figure>
-                <div class="social">
-                  <a href="#"><span class="icon-facebook"></span></a>
-                  <a href="#"><span class="icon-twitter"></span></a>
-                  <a href="#"><span class="icon-instagram"></span></a>
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                <div class="person">
+                    <div class="bio-img">
+                        <figure>
+                            <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid">
+                        </figure>
+                        <div class="social">
+                            <a href="#"><span class="icon-facebook"></span></a>
+                            <a href="#"><span class="icon-twitter"></span></a>
+                            <a href="#"><span class="icon-instagram"></span></a>
+                        </div>
+                    </div>
+                    <h2 class="text-black h1">Austin Christian</h2>
+                    <span class="sub-title d-block mb-3">Financing</span>
+                    <p>“I will tell you the secret to getting rich on Wall Street. You try to be greedy when others are fearful. And you try to be fearful when others are greedy.”</p>
                 </div>
-              </div>
-              <h2 class="text-black h1">Hrutvik Barot</h2>
-              <span class="sub-title d-block mb-3">CEO</span>
-              <p>“User experience is everything. It always has been, but it’s undervalued and underinvested in. If you don’t know user-centered design, study it. Hire people who know it. Obsess over it. Live and breathe it. Get your whole company on board.”</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-
-    <div class="site-section testimonial-wrap bg-light" id="testimonials-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-12 text-center">
-            <h2 class="section-title mb-3">Testimonials</h2>
-          </div>
-        </div>
-      </div>
-      <div class="slide-one-item home-slider owl-carousel">
-          <div>
-            <div class="testimonial">
-              <figure class="mb-4 d-block align-items-center justify-content-center">
-                <div><img src="{% static 'images/male.jpg' %}" alt="Image" class="w-100 img-fluid mb-3 shadow"></div>
-              </figure>
-              <blockquote class="mb-3">
-                <p>“No matter what the industry you choose to ultimately invest all your time and energy in, be sure you're the owner, founder, and CEO. Remember, if you don't own it, you can't control it nor can you depend on it.</p>
-              </blockquote>
-              <p class="text-black"><strong>Mit Bhavsar</strong></p>
-
-              
-            </div>
-          </div>
-          <div>
-            <div class="testimonial">
-              
-              <figure class="mb-4 d-block align-items-center justify-content-center">
-                <div><img src="{% static 'images/male.jpg' %}" alt="Image" class="w-100 img-fluid mb-3 shadow"></div>
-              </figure>
-
-              <blockquote class="mb-3">
-                <p>“Marketing’s job is never done. It’s about perpetual motion. We must continue to innovate every day.Ignoring online marketing is like opening a business but not telling anyone.”</p>
-              </blockquote>
-              
-              <p class="text-black"><strong>Parth Champaneri</strong></p>
-              
-              
-            </div>
-          </div>
-
-          <div>
-            <div class="testimonial">
-              <figure class="mb-4 d-block align-items-center justify-content-center">
-                <div><img src="{% static 'images/male.jpg' %}" alt="Image" class="w-100 img-fluid mb-3 shadow"></div>
-              </figure>
-              <blockquote class="mb-3">
-                <p>“Finance is not merely about making money. It’s about achieving our deep goals and protecting the fruits of our labor. It’s about stewardship and, therefore, about achieving the good society.”</p>
-              </blockquote>
-              <p class="text-black"><strong>Austin Christian</strong></p>
-
-              
-            </div>
-           
-          </div>
-
-          <div>
-            <div class="testimonial">
-              <figure class="mb-4 d-block align-items-center justify-content-center">
-                <div><img src="{% static 'images/male.jpg' %}" alt="Image" class="w-100 img-fluid mb-3 shadow"></div>
-              </figure>
-              <blockquote class="mb-3">
-                <p>“Every time you make the hard, correct decision you become a bit more courageous, and every time you make the easy, wrong decision you become a bit more cowardly. If you are President, these choices will lead to a courageous or cowardly company.” </p>
-              </blockquote>
-              <p class="text-black"><strong>Hrutvik Barot</strong></p>
-
-              
             </div>
 
-          </div>
-
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="person">
+                    <div class="bio-img">
+                        <figure>
+                            <img src="{% static 'images/male.jpg' %}" alt="Image" class="img-fluid">
+                        </figure>
+                        <div class="social">
+                            <a href="#"><span class="icon-facebook"></span></a>
+                            <a href="#"><span class="icon-twitter"></span></a>
+                            <a href="#"><span class="icon-instagram"></span></a>
+                        </div>
+                    </div>
+                    <h2 class="text-black h1">Hrutvik Barot</h2>
+                    <span class="sub-title d-block mb-3">CEO</span>
+                    <p>“User experience is everything. It always has been, but it’s undervalued and underinvested in. If you don’t know user-centered design, study it. Hire people who know it. Obsess over it. Live and breathe it. Get your whole company on
+                        board.”</p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="site-section bg-image2 overlay" id="contact-section" style="background-image: url({% static 'images/hero_1.jpg' %});">
-      <div class="container">
+</div> -->
+
+<div class="site-section testimonial-wrap bg-light" id="testimonials-section">
+    <div class="container">
         <div class="row mb-5">
-          <div class="col-12 text-center">
-            <h2 class="section-title mb-3 text-white">Contact Us</h2>
-          </div>
+            <div class="col-12 text-center">
+                <h2 class="section-title mb-3">Testimonials</h2>
+            </div>
+        </div>
+    </div>
+    <div class="slide-one-item home-slider owl-carousel">
+        <div>
+            <div class="testimonial">
+                <figure class="mb-4 d-block align-items-center justify-content-center">
+                    <div><img src="{% static 'images/male.jpg' %}" alt="Image" class="w-100 img-fluid mb-3 shadow"></div>
+                </figure>
+                <blockquote class="mb-3">
+                    <p>“No matter what the industry you choose to ultimately invest all your time and energy in, be sure you're the owner, founder, and CEO. Remember, if you don't own it, you can't control it nor can you depend on it.</p>
+                </blockquote>
+                <p class="text-black"><strong>Mit Bhavsar</strong></p>
+
+
+            </div>
+        </div>
+        <div>
+            <div class="testimonial">
+
+                <figure class="mb-4 d-block align-items-center justify-content-center">
+                    <div><img src="{% static 'images/male.jpg' %}" alt="Image" class="w-100 img-fluid mb-3 shadow"></div>
+                </figure>
+
+                <blockquote class="mb-3">
+                    <p>“Marketing’s job is never done. It’s about perpetual motion. We must continue to innovate every day.Ignoring online marketing is like opening a business but not telling anyone.”</p>
+                </blockquote>
+
+                <p class="text-black"><strong>Parth Champaneri</strong></p>
+
+
+            </div>
+        </div>
+
+        <div>
+            <div class="testimonial">
+                <figure class="mb-4 d-block align-items-center justify-content-center">
+                    <div><img src="{% static 'images/male.jpg' %}" alt="Image" class="w-100 img-fluid mb-3 shadow"></div>
+                </figure>
+                <blockquote class="mb-3">
+                    <p>“Finance is not merely about making money. It’s about achieving our deep goals and protecting the fruits of our labor. It’s about stewardship and, therefore, about achieving the good society.”</p>
+                </blockquote>
+                <p class="text-black"><strong>Austin Christian</strong></p>
+
+
+            </div>
+
+        </div>
+
+        <div>
+            <div class="testimonial">
+                <figure class="mb-4 d-block align-items-center justify-content-center">
+                    <div><img src="{% static 'images/male.jpg' %}" alt="Image" class="w-100 img-fluid mb-3 shadow"></div>
+                </figure>
+                <blockquote class="mb-3">
+                    <p>“Every time you make the hard, correct decision you become a bit more courageous, and every time you make the easy, wrong decision you become a bit more cowardly. If you are President, these choices will lead to a courageous or cowardly
+                        company.” </p>
+                </blockquote>
+                <p class="text-black"><strong>Hrutvik Barot</strong></p>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="site-section bg-image2 overlay" id="contact-section" style="background-image: url({% static 'images/hero_1.jpg' %});">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title mb-3 text-white">Contact Us</h2>
+            </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-lg-7 mb-5">
+            <div class="col-lg-7 mb-5">
 
-            
 
-            <form action="/contact" method="post" class="p-5 bg-white">
-              {% csrf_token %}
-              <h2 class="h4 text-black mb-5">Contact Form</h2> 
-              <div class="row form-group">
-                <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">First Name</label>
-                  <input type="text" name="fname" class="form-control rounded-0" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="text-black" for="lname">Last Name</label>
-                  <input type="text" name="lname" class="form-control rounded-0" required>
-                </div>
-              </div>
 
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="email">Email</label> 
-                  <input type="email" name="email" class="form-control rounded-0" required>
-                </div>
-              </div>
+                <form action="/contact" method="post" class="p-5 bg-white">
+                    {% csrf_token %}
+                    <h2 class="h4 text-black mb-5">Contact Form</h2>
+                    <div class="row form-group">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <label class="text-black" for="fname">First Name</label>
+                            <input type="text" name="fname" class="form-control rounded-0" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="text-black" for="lname">Last Name</label>
+                            <input type="text" name="lname" class="form-control rounded-0" required>
+                        </div>
+                    </div>
 
-              <div class="row form-group">
-                
-                <div class="col-md-12">
-                  <label class="text-black" for="subject">Subject</label> 
-                  <input type="subject" name="subject" class="form-control rounded-0" required>
-                </div>
-              </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="text-black" for="email">Email</label>
+                            <input type="email" name="email" class="form-control rounded-0" required>
+                        </div>
+                    </div>
 
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="message">Message</label> 
-                  <textarea name="message" name="message" cols="30" rows="7" class="form-control rounded-0" required placeholder="Leave your message here..."></textarea>
-                </div>
-              </div>
+                    <div class="row form-group">
 
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <input type="submit" value="Send Message" class="btn btn-primary mr-2 mb-2">
-                </div>
-              </div>
+                        <div class="col-md-12">
+                            <label class="text-black" for="subject">Subject</label>
+                            <input type="subject" name="subject" class="form-control rounded-0" required>
+                        </div>
+                    </div>
 
-  
-            </form>
-          </div>
-        
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="text-black" for="message">Message</label>
+                            <textarea name="message" name="message" cols="30" rows="7" class="form-control rounded-0" required placeholder="Leave your message here..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Send Message" class="btn btn-primary mr-2 mb-2">
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
         </div>
-        
-      </div>
+
     </div>
+</div>
+
+<script>
+    // $('.project').onClick() {
+    //     console.log("clicked")
+    // };
+    $('.project').click(function() {
+        console.log('you hoverd on: ', this);
+        //     //  $('#id').hide();
+        //     //  $('.class').hide();
+
+    });
+</script>
 
 
 {% endblock %}

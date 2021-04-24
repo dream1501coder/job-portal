@@ -8,9 +8,14 @@ from django.core.files.storage import FileSystemStorage
 from .models import profile
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages #import messages
 
 def index(request):
-	return render(request, 'freelancer/index.html')
+	all_data =add_project.objects.filter(status="Approved").order_by('-create_at')
+		
+	return render(request, 'freelancer/index.html',{'job_data':all_data})
+
+	# return render(request, 'freelancer/index.html')
 
 def searchMatch(query,item):
 	# return true  only if query matches the item
@@ -287,9 +292,11 @@ def contact(request):
 			message = request.POST['message']
 			message_stored = comment(fname=fname,lname=lname,email=email,subject=subject,message=message)
 			message_stored.save()
-			return redirect('/freelancer/index.html')
+			messages.success(request, "Message sent." )
+			return redirect('/',{'msg':"your form has been submitted successfully!!"})
 		else:
-			return render(request, 'freelancer/contact.html', {'error_login': "Please Check Credentials"})
+			return render(request, '/contact.html', {'error_login': "Please Check Credentials"})
+
 
 def registration(request):
 	return render(request, 'freelancer/registration.html')
