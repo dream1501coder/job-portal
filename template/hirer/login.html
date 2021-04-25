@@ -116,10 +116,12 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <form action="/hirer/signup " method="POST" accept-charset="utf-8" enctype="multipart/form-data">
-                        {% csrf_token %} First Name : <input type="text" name="fname" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your FIrst Name" aria-describedby="inputGroupPrepend2" required> Last Name : <input type="text"
-                            name="lname" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your FIrst Name" aria-describedby="inputGroupPrepend2" required> Username : <input type="text" name="username" class="form-control" id="validationDefaultUsername"
-                            placeholder="Please Enter Your Last Name" aria-describedby="inputGroupPrepend2" required> Email : <input type="text" name="email" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Email" aria-describedby="inputGroupPrepend2"
-                            required> Password: <input type="text" name="password" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Password" aria-describedby="inputGroupPrepend2" required> Confirm Password: <input type="text"
+                        {% csrf_token %} First Name : <input type="text" name="fname" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your First Name" aria-describedby="inputGroupPrepend2" required onkeypress="return (event.charCode > 64 && 
+							event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"> Last Name : <input type="text"
+                            name="lname" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Last Name" aria-describedby="inputGroupPrepend2" required onkeypress="return (event.charCode > 64 && 
+							event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"> Username : <input type="text" name="username" class="form-control" id="validationDefaultUsername"
+                            placeholder="Please Enter Your Username" aria-describedby="inputGroupPrepend2" required> Email : <input type="email" name="email" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Email" aria-describedby="inputGroupPrepend2"
+                            required> Password: <input type="password" name="password" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Password" aria-describedby="inputGroupPrepend2" required> Confirm Password: <input type="password"
                             name="confirmpassword" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Password" aria-describedby="inputGroupPrepend2" required> Technology : <input type="text" name="technology" class="form-control"
                             id="validationDefaultUsername" placeholder="Please Enter Your Technology" aria-describedby="inputGroupPrepend2" required>
                         <!-- Image : <input type="file" name="image" class="form-control" id="validationDefaultUsername"  required> -->
