@@ -13,6 +13,9 @@
                         <h1>Make Your Business More Profitable and secure</h1>
                         <p class="mb-5">Freelancing jobportal is one of best and 100% geniune freelancer site.</p>
                         <div>
+
+                            <!-- {% if user.is_authenticated %}
+                            <a href="/jobfeed" class="btn btn-primary mr-2 mb-2">Get Started</a> {% endif %} -->
                             <a href="#" class="btn btn-primary mr-2 mb-2">Get Started</a>
                         </div>
                     </div>
@@ -499,18 +502,22 @@
 
     </div>
 </div>
-
+<!-- {% if message %}
 <script>
-    // $('.project').onClick() {
-    //     console.log("clicked")
-    // };
-    $('.project').click(function() {
-        console.log('you hoverd on: ', this);
-        //     //  $('#id').hide();
-        //     //  $('.class').hide();
-
-    });
+    alert('{{ message }}');
 </script>
+{% endif %} -->
+
+{% if messages %} {% for message in messages %} {% if message.tags %}
+<script>
+    alert("{{ message }}")
+</script> {% endif %} {% endfor %} {% endif %}
 
 
-{% endblock %}
+<!-- {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %} -->{% endblock %} {% block js %} {% endblock %}

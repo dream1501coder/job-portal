@@ -37,6 +37,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'images/loginpage/css/util.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'images/loginpage/css/main.css' %}">
     <!--===============================================================================================-->
+
+    {% if messages %} {% for message in messages %} {% if message.tags %}
+    <script>
+        alert("{{ message }}")
+    </script> {% endif %} {% endfor %} {% endif %}
 </head>
 
 <body>
@@ -150,6 +155,7 @@
     <script src="{% static 'images/loginpage/vendor/select2/select2.min.js' %}"></script>
     <!--===============================================================================================-->
     <script src="{% static 'images/loginpage/js/main.js' %}"></script>
+
 
 
 

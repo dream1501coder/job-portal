@@ -1,47 +1,29 @@
-{% extends 'freelancer/layout/master.html' %}
-{% load static %}
-{% block main %}
+{% extends 'freelancer/layout/master.html' %} {% load static %} {% block main %}
 <br/><br/><br/><br/><br/>
 <center>
-	<h4>Registration Page</h4>
+    <h4>Registration Page</h4>
 </center>
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			 <form action="/signup" method="POST" enctype="multipart/form-data">
-           			 {% csrf_token %}
-                    First Name : <input type="text" name="fname" class="form-control" placeholder="Please Enter Your First Name" required>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form action="/signup" method="POST" enctype="multipart/form-data">
+                {% csrf_token %} First Name : <input type="text" name="fname" class="form-control" placeholder="Please Enter Your First Name" required> Last Name : <input type="text" name="lname" class="form-control" placeholder="Please Enter Your FIrst Name"
+                    required> Username : <input type="text" name="username" class="form-control" placeholder="Please Enter Your Last Name" required> Email : <input type="text" name="email" class="form-control" placeholder="Please Enter Your Email" required>                Password: <input type="password" name="password" class="form-control" placeholder="Please Enter Your Password" required> Confirm Password: <input type="password" name="confirmpassword" class="form-control" placeholder="Please Enter Your Password"
+                    required> Technology : <input type="text" name="technology" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Technology" required> Date of Birth : <input type="date" name="dob" class="form-control" id="validationDefaultUsername"
+                    required> Image : <input type="file" name="image" class="form-control" id="validationDefaultUsername" required> Phone number : <input type="number" name="phonenumber" class="form-control" placeholder="Please Enter Your phonenumber" required>                Address : <input type="text" name="address" class="form-control" placeholder="Please Enter Your Address" required>
+                <br/><br/>
+                <button class="login btn btn-success text-center" type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div class="col-md-2">
+</div>
 
-                    Last Name : <input type="text" name="lname" class="form-control" placeholder="Please Enter Your FIrst Name" required>
-                            
-                            Username : <input type="text" name="username" class="form-control" placeholder="Please Enter Your Last Name" required>
-
-                            Email : <input type="text" name="email" class="form-control" placeholder="Please Enter Your Email" required>
-                            
-                           Password: <input type="password" name="password" class="form-control" placeholder="Please Enter Your Password" required>
-
-                            Confirm Password: <input type="password" name="confirmpassword" class="form-control" placeholder="Please Enter Your Password" 
-                            required>
-                            
-                           Technology : <input type="text" name="technology" class="form-control" id="validationDefaultUsername" placeholder="Please Enter Your Technology" required>
-
-                           Date of Birth : <input type="date" name="dob" class="form-control" id="validationDefaultUsername"  required>
-
-                           Image : <input type="file" name="image" class="form-control" id="validationDefaultUsername"  required>
-
-                           Phone number : <input type="number" name="phonenumber" class="form-control"  placeholder="Please Enter Your phonenumber" required>
-                           
-                           Address : <input type="text" name="address" class="form-control" placeholder="Please Enter Your Address" required>
-							<br/><br/>
-                            <button class="login btn btn-success text-center" type="submit" >Sign Up</button>
-                        </form>	
-                    </div>
-                </div class="col-md-2"></div>
-
-		</div> 
-	</div>
-</div>  
-
-{% endblock %}
+</div>
+</div>
+</div>
+{% if messages %} {% for message in messages %} {% if message.tags %}
+<script>
+    alert("{{ message }}")
+</script> {% endif %} {% endfor %} {% endif %} {% endblock %}

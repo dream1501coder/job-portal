@@ -7,6 +7,8 @@ from .models import User
 from admin1.models import add_project
 from django.http import HttpResponse
 from hirer.models import project_bid_rate, payment_report
+from django.contrib import messages #import messages
+
 
 def show_profile(request):
 	if request.user.is_authenticated:
@@ -40,6 +42,8 @@ def update_profile(request,id):
 			if request.method == 'POST':
 				user = User.objects.filter(id=id).update(username=request.POST['username'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'])
 				hirer_profile=profile.objects.filter(user_id=id).update(phonenumber=request.POST['phonenumber'], address=request.POST['address'], technology=request.POST['technology'], status="Not Active", is_login="hirer")
+				messages.success(request,'Profile updated successfully')
+				
 				return redirect('/hirer/profile')
 			else:
 				profile_data = profile.objects.filter(user_id=id)
@@ -76,6 +80,8 @@ def postjob(request):
 				status = "Not Active"
 				project_detail_store = add_project(user_id=request.user, projectname=projectname, description=description, start_time=start_time, end_time=end_time, amount=amount, front_end=front_end,back_end=back_end, status=status)
 				project_detail_store.save()
+				messages.success(request,'Project added successfully')
+				
 				return redirect('/hirer/postjob')
 			else:
 				project_detail = add_project.objects.filter(user_id=request.user).order_by('-id')
@@ -92,6 +98,8 @@ def delete_project(request,id):
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
 		if len(check_status) == 1:
 			delete_project_find = add_project.objects.filter(id=id).delete()
+			messages.success(request,'Project deleted successfully')
+
 			return redirect('/hirer/postjob')
 		else:
 			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
@@ -165,10 +173,13 @@ def login(request):
 		if len(check_status) == 1:
 			if user is not None:
 				auth.login(request, user)
+				
 				return redirect('/hirer')
 		else:
+			messages.error(request,'Please Check Credentials')
 			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
 	else:
+		
 		return render(request, 'hirer/login.html')
 
 def logout(request):
@@ -181,16 +192,19 @@ def user_signup(request):
 		if request.POST['password'] == request.POST['confirmpassword']:
 			try:
 				user = User.objects.get(username=request.POST['username'])
-				return render(request, 'hirer/layout/master.html', {'error':'please change username'})
+				messages.success(request,'This username is taken, please choose another username')
+				return render(request, 'hirer/login.html', {'error':'please change username'})
 			except User.DoesNotExist:
 				user = User.objects.create_user(username=request.POST['username'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'], password=request.POST['password'])
 				hirer_profile=profile(user_id=user, phonenumber=request.POST['phonenumber'], address=request.POST['address'], technology=request.POST['technology'], status="Not Active", is_login="hirer")
 				hirer_profile.save()
+				messages.success(request,'Successfully Registerd, Now you can login')
 				return redirect('/hirer')
 		else:
-			return render(request, 'hirer/layout/master.html' , {'error':'please check password and confirmpassword'})
+			messages.success(request,'please check password and confirmpassword')
+			return render(request, 'hirer/login.html' , {'error':'please check password and confirmpassword'})
 	else:
-		return render(request, 'hirer/layout/master.html')
+		return render(request, 'hirer/login.html')
 
 
 def bid_rate_show(request, id):
@@ -220,6 +234,8 @@ def project_bidding_approval(request, id):
 				status = "Approved"
 			project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status)
 			project_bid_rate_store.save()
+			messages.success(request,'thanks for Project Approving to Freelancer')
+
 			return redirect('/hirer/project_bid_rate')
 		else:
 			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})

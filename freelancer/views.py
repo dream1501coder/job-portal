@@ -26,25 +26,20 @@ def searchMatch(query,item):
 
 def search(request):
 	query = request.GET.get('search')
-	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
-	if len(check_status) == 1:
-		all_data1 =add_project.objects.filter(status="Approved").order_by('-create_at')
-		all_data = [item for item in all_data1 if searchMatch(query,item)]
+	if len(query)==0:
+		messages.success(request,'please enter keywords to find')
+		return redirect('freelancer/jobfeed')
+	else:
+		check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
+		if len(check_status) == 1:
+			all_data1 =add_project.objects.filter(status="Approved").order_by('-create_at')
+			all_data = [item for item in all_data1 if searchMatch(query,item)]
 	
-		# if len(all_data)!=0:
-		# 	paginator = Paginator(all_data, 4)
-		# 	page = request.GET.get('page')
-		# 	try:
-		# 		all_data = paginator.page(page)
-		# 	except PageNotAnInteger:
-		# 		all_data = paginator.page(1)
-		# 	except EmptyPage:
-		# 		all_data = paginator.page(paginator.num_pages)
-		return render(request, 'freelancer/search.html',{'job_data':all_data,'keyword':query})
+			return render(request, 'freelancer/search.html',{'job_data':all_data,'keyword':query})
 		
 		# return render(request, 'freelancer/search.html',{'job_data':"No Results Found",'keyword':query})
-	else:
-		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
+		else:
+			return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
 
 def show_profile(request):
@@ -64,8 +59,10 @@ def edit_profile(request,id):
 			profile_data = profile.objects.filter(user_id=id)
 			return render(request, 'freelancer/edit_profile.html', {'profile_data':profile_data})
 		else:
+			messages.success(request,'fisrt logout from another user account')
 			return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 	else:
+		messages.success(request,'Please Check Credentials')
 		return render(request, 'freelancer/index.html')
 	
 def update_profile(request,id):
@@ -73,9 +70,10 @@ def update_profile(request,id):
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 		if len(check_status) == 1:
 			if request.method == 'POST':
-				user = User.objects.filter(id=id).update(username=request.POST['username'],password=request.POST['password'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'])
+				user = User.objects.filter(id=id).update(username=request.POST['username'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'])
 
 				hirer_profile=profile.objects.filter(user_id=id).update(phonenumber=request.POST['phonenumber'], address=request.POST['address'], technology=request.POST['technology'], status="Not Active", is_login="freelancer")
+				messages.success(request,'Profile updated successfully')
 				return redirect('/profile')
 			else:
 				profile_data = profile.objects.filter(user_id=id)
@@ -121,6 +119,7 @@ def user_signup(request):
 		if request.POST['password'] == request.POST['confirmpassword']:
 			try:
 				user = User.objects.get(username=request.POST['username'])
+				messages.success(request,'This username is taken, please choose another username')
 				return render(request, 'freelancer/index.html', {'error':'please change username'})
 			except User.DoesNotExist:
 				user = User.objects.create_user(username=request.POST['username'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'], password=request.POST['password'])
@@ -137,8 +136,10 @@ def user_signup(request):
 				is_login = "freelancer"
 				profile_data_store = profile(user_id=user, phonenumber=phonenumber, address=address, technology=technology, image=url1, status=status, is_login=is_login)
 				profile_data_store.save()
+				messages.success(request, 'Welcome user, registered successfully')
 				return redirect('/')
 		else:
+			messages.success(request,'password and confirm password should match')
 			return render(request, 'freelancer/index.html' , {'error':'please check password and confirmpassword'})
 	else:
 		return render(request, 'freelancer/index.html')
@@ -159,9 +160,12 @@ def login(request):
 				auth.login(request, user)
 				return redirect('/')
 			else:
+				# messages.error(request,'Please Check Credentials')
 				return redirect('/')
 		else:
-			return render(request, 'index.html', {'error_login': "Please Check Credentials"})
+			messages.error(request,'Please Check Credentials and try again')
+			
+			return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 	else:
 		return redirect('/')
 
@@ -174,9 +178,14 @@ def bidding_rate(request, id):
 			comments = request.POST['comment']
 			status = "Not Approved"
 			progress = ""
-			project_bid_rate_store = project_bid_rate(bid_rate=bid_rate, project=id, user=request.user, comments=comments, status=status,progress=progress)
-			project_bid_rate_store.save()
-			return redirect('/freelancer/jobfeed')
+			if len(bid_rate)==0 and len(comments)==0:
+				messages.success(request,' please enter your bidrate and comments before submit')
+				return redirect('/jobfeed')
+			else:
+				project_bid_rate_store = project_bid_rate(bid_rate=bid_rate, project=id, user=request.user, comments=comments, status=status,progress=progress)
+				project_bid_rate_store.save()
+				messages.success(request,'your bidrate has been sent,We wil get back to you very soon!')
+				return redirect('/freelancer/jobfeed')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
@@ -198,6 +207,7 @@ def bidding_starting_progress(request,id):
 				progress = "starting"
 		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
 		project_bid_rate_store.save()
+		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
@@ -219,6 +229,7 @@ def bidding_intermediate_progress(request,id):
 				progress = "intermediate"
 		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
 		project_bid_rate_store.save()
+		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
@@ -239,6 +250,7 @@ def bidding_mediate_progress(request,id):
 				progress = "mediate"
 		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
 		project_bid_rate_store.save()
+		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
@@ -259,6 +271,7 @@ def bidding_finished_progress(request,id):
 				progress = "finished"
 		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
 		project_bid_rate_store.save()
+		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
@@ -279,6 +292,7 @@ def bidding_completed_progress(request,id):
 				progress = "completed"
 		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
 		project_bid_rate_store.save()
+		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
@@ -292,10 +306,13 @@ def contact(request):
 			message = request.POST['message']
 			message_stored = comment(fname=fname,lname=lname,email=email,subject=subject,message=message)
 			message_stored.save()
-			messages.success(request, "Message sent." )
-			return redirect('/',{'msg':"your form has been submitted successfully!!"})
+			messages.success(request, 'Thanks for contacting us. We wil get back to you soon!')
+			return redirect('/')
+			# return render_to_response('template_name', message='Save complete')
 		else:
-			return render(request, '/contact.html', {'error_login': "Please Check Credentials"})
+			messages.error(request, 'oops!!! something went wrong')
+
+			return render(request, '/', {'error_login': "Please Check Credentials"})
 
 
 def registration(request):

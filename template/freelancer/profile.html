@@ -142,9 +142,9 @@
                                 {{x.user_id.first_name}}&nbsp;&nbsp;{{x.user_id.last_name}}
                             </h5>
                             <h6>
-                                Web Developer and Designer
+                                {{x.technology}} Developer
                             </h6>
-                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                            <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -233,20 +233,20 @@
                                     <p>{{x.create_at}}</p>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6">
                                     <label>Hourly Rate</label>
                                 </div>
                                 <div class="col-md-6">
                                     <p>10$/hr</p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Status</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{x.status}}</p>
+                                    <p>Active</p>
                                 </div>
                             </div>
 
@@ -266,14 +266,14 @@
                                     <p>{{x.is_login}}</p>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6">
                                     <label>Availability</label>
                                 </div>
                                 <div class="col-md-6">
                                     <p>6 months</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -283,5 +283,7 @@
     </div>
 </div>
 </div>
-
-{% endblock %}
+{% if messages %} {% for message in messages %} {% if message.tags %}
+<script>
+    alert("{{ message }}")
+</script> {% endif %} {% endfor %} {% endif %} {% endblock %}

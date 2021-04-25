@@ -46,6 +46,14 @@
 
     <link rel="stylesheet" href="{% static 'css/style1.css' %}">
 
+    <style>
+        .active1 {
+            box-shadow: 20px 20px 30px -10px #64a1b1;
+            color: #fff;
+            font-style: oblique;
+        }
+    </style>
+
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -76,26 +84,37 @@
                         <nav class="site-navigation position-relative  text-right" role="navigation">
 
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block ml-0 pl-0">
-                                <li><a href="/" class="nav-link">Home</a></li>
-                                <li><a href="/#project-section" class="nav-link">Projects</a></li>
-                                <li><a href="/#features-section" class="nav-link">Features</a></li>
-                                <li class="">
+
+                                <li class="{% if request.resolver_match.url_name == 'index' %}active1{% endif %}"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+
+                                <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}"><a href="/#project-section" class="nav-link">Projects</a></li>
+
+                                <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}"><a href="/#features-section" class="nav-link">Features</a></li>
+
+                                <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}">
                                     <a href="/#about-section" class="nav-link">About Us</a>
 
                                 </li>
 
-                                <li><a href="/#contact-section" class="nav-link">Contact</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}"><a href="/#contact-section" class="nav-link">Contact</a></li>
                                 <!--                <li><a href="/hirer/login" class="nav-link">Be Hirer</a></li>-->
 
                                 {% if user.is_authenticated %}
-                                <li><a href="/jobfeed" class="nav-link">Jobfeed</a></li>
-                                <li><a href="/report" class="nav-link">Reports</a></li>
-                                <li><a href="/profile">Profile</a></li>
-                                <li><a href="/logout" class="nav-link">logout</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'jobfeed' %}active1{% endif %}"><a href="{% url 'jobfeed' %}" class="nav-link">Jobfeed</a></li>
+
+                                <li class="{% if request.resolver_match.url_name == 'report' %}active1{% endif %}"><a href="{% url 'report' %}" class="nav-link">Reports</a></li>
+
+                                <li class="{% if request.resolver_match.url_name == 'profile' %}active1{% endif %}"><a href="{% url 'profile' %}">Profile</a></li>
+
+                                <li class="{% if request.resolver_match.url_name == 'logout' %}active1{% endif %}"><a href="{% url 'logout' %}" class="nav-link">logout</a></li>
+
                                 {% else %}
+
                                 <li><a href="/hirer/login" class="nav-link">Be Hirer</a></li>
+
                                 <li><a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a></li>
-                                <li><a href="/registration" class="nav-link">Registration</a></li>
+
+                                <li class="{% if request.resolver_match.url_name == 'registration' %}active1{% endif %}"><a href="{% url 'registration' %}" class="nav-link">Registration</a></li>
                                 {% endif %}
 
 
@@ -207,4 +226,4 @@
                     <script src="{% static 'test/js/main.js' %}"></script>
 
 
-                    {% endblock %}
+                    {% endblock %} {% block js %} {% endblock %}
