@@ -12,13 +12,15 @@
 		<div class="col-md-8">
 			 <form action="/signup" method="POST" enctype="multipart/form-data">
            			 {% csrf_token %}
-                    First Name : <input type="text" name="fname" class="form-control" placeholder="Please Enter Your First Name" required>
+                    First Name : <input type="text" name="fname" class="form-control" placeholder="Please Enter Your First Name" required onkeypress="return (event.charCode > 64 && 
+							event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
 
-                    Last Name : <input type="text" name="lname" class="form-control" placeholder="Please Enter Your FIrst Name" required>
+                    Last Name : <input type="text" name="lname" class="form-control" placeholder="Please Enter Your Last Name" required onkeypress="return (event.charCode > 64 && 
+							event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                             
-                            Username : <input type="text" name="username" class="form-control" placeholder="Please Enter Your Last Name" required>
+                            Username : <input type="text" name="username" class="form-control" placeholder="Please Enter Your Username" required>
 
-                            Email : <input type="text" name="email" class="form-control" placeholder="Please Enter Your Email" required>
+                            Email : <input type="email" name="email" class="form-control" placeholder="Please Enter Your Email" required>
                             
                            Password: <input type="password" name="password" class="form-control" placeholder="Please Enter Your Password" required>
 
@@ -31,7 +33,7 @@
 
                            Image : <input type="file" name="image" class="form-control" id="validationDefaultUsername"  required>
 
-                           Phone number : <input type="number" name="phonenumber" class="form-control"  placeholder="Please Enter Your phonenumber" required>
+                           Phone number : <input type="number" name="phonenumber" class="form-control"  placeholder="Please Enter Your phonenumber" required onkeypress="return isNumber(event)">
                            
                            Address : <input type="text" name="address" class="form-control" placeholder="Please Enter Your Address" required>
 							<br/><br/>
