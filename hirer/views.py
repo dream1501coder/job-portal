@@ -9,7 +9,10 @@ from django.http import HttpResponse
 from hirer.models import project_bid_rate, payment_report
 from django.contrib import messages #import messages
 
+from django.views.decorators.csrf import csrf_exempt
+from .paytm  import Checksum
 
+MERCHANT_KEY = 'Your-Merchant-Key-Herefdhfhfg133'
 def show_profile(request):
 	if request.user.is_authenticated:
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
@@ -127,9 +130,6 @@ def project_biding_rate(request):
 	else:
 		return redirect('/hirer/login')
 
-
-
-
 def paystatus(request):
 	if request.user.is_authenticated:
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
@@ -240,6 +240,26 @@ def project_bidding_approval(request, id):
 		else:
 			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
 
+# def payment_given(request, id):
+# 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
+# 	if len(check_status) == 1:
+# 		if request.method == 'POST':
+# 			project_bidding_rate = project_bid_rate.objects.filter(project=id)
+# 			for x in project_bidding_rate:
+# 				project = x.project
+# 				user = x.user
+# 				total_amount = x.bid_rate
+# 			received_amount = request.POST['received_amount']
+# 			payment_record = payment_report(project=project, user=user, total_amount=total_amount, received_amount=received_amount)
+# 			payment_record.save()
+# 			return redirect('/hirer/paystatus')
+# 		else:
+# 			project_bidding_rate_detail = project_bid_rate.objects.filter(project=id)
+# 			return render(request, 'hirer/paystatus.html', {'project_bidding_rate_detail':project_bidding_rate_detail})
+# 	else:
+# 		return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
+
+
 def payment_given(request, id):
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
 	if len(check_status) == 1:
@@ -252,9 +272,48 @@ def payment_given(request, id):
 			received_amount = request.POST['received_amount']
 			payment_record = payment_report(project=project, user=user, total_amount=total_amount, received_amount=received_amount)
 			payment_record.save()
+			param_dict={
+            # 'MID': 'YOUR MERCHANT ID',
+            'MID': 'WorldP64425807474247',
+            'ORDER_ID': 'project_bid_rate.id',
+            'TXN_AMOUNT': '1',
+            'CUST_ID': 'profile.email',
+            'INDUSTRY_TYPE_ID': 'Retail',
+            'WEBSITE': 'WEBSTAGING',
+            'CHANNEL_ID': 'WEB',
+            'CALLBACK_URL':'http://127.0.0.1:8000/hirer/handlerequest/',
+    		}
+		
+			param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
+			
+			return  render(request, 'hirer/paytm.html', {'param_dict': param_dict})
 			return redirect('/hirer/paystatus')
+			
 		else:
 			project_bidding_rate_detail = project_bid_rate.objects.filter(project=id)
 			return render(request, 'hirer/paystatus.html', {'project_bidding_rate_detail':project_bidding_rate_detail})
 	else:
 		return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})
+
+# @csrf_exempt
+# def handlerequest(request):
+# 	# pass
+# 	return HttpResponse('Payment is Done')
+
+@csrf_exempt
+def handlerequest(request):
+    # paytm will send you post request here
+    form = request.POST
+    response_dict = {}
+    for i in form.keys():
+        response_dict[i] = form[i]
+        if i == 'CHECKSUMHASH':
+            checksum = form[i]
+
+    verify = Checksum.verify_checksum(response_dict, MERCHANT_KEY, checksum)
+    if verify:
+        if response_dict['RESPCODE'] == '01':
+            print('Payment Successful')
+        else:
+            print('Payment was not successful because' + response_dict['RESPMSG'])
+    return render(request, 'hirer/paymentstatus.html', {'response': response_dict})
