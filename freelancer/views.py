@@ -329,7 +329,7 @@ def logins(request):
 				auth.login(request, user)
 				return redirect('/')
 			else:
-				# messages.error(request,'Please Check Credentials')
+				messages.error(request,'Please Check Credentials')
 				return redirect('/')
 		else:
 			messages.error(request,'Please Check Credentials and try again')
