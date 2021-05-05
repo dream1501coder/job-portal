@@ -27,10 +27,11 @@
                 <td>{{x.progress}}</td>
                 <td>{{x.bid_rate}}</td>
                 <td> {% for y in payment_received_status %} {% if x.project == y.project %} {{y.received_amount}} {% endif %} {% endfor %}</td>
-                <td><a href="/freelancer/bidding_starting_progress/{{x.id}}" class="btn btn-info">Starting</a><a href="/freelancer/bidding_intermediate_progress/{{x.id}}" class="btn btn-warning btn-sm">Intermediate</a><a href="/freelancer/bidding_mediate_progress/{{x.id}}"
-                        class="btn btn-primary">Mediate</a>
-                    <a href="/freelancer/bidding_finished_progress/{{x.id}}" class="btn btn-secondary">finished</a>
-                    <a href="/freelancer/bidding_completed_progress/{{x.id}}" class="btn btn-success">Completed</a></td>
+                <td><a href="/freelancer/bidding_starting_progress/{{x.id}}" class="btn btn-info btn-sm">Starting</a>
+                    <a href="/freelancer/bidding_intermediate_progress/{{x.id}}" class="btn btn-warning btn-sm">Intermediate</a>
+                    <a href="/freelancer/bidding_mediate_progress/{{x.id}}" class="btn btn-primary btn-sm" style="margin-top:8px;margin-left:70px;">Mediate</a><br>
+                    <a href="/freelancer/bidding_finished_progress/{{x.id}}" class="btn btn-secondary btn-sm" style="margin-top:8px;">finished</a>
+                    <a href="/freelancer/bidding_completed_progress/{{x.id}}" class="btn btn-success btn-sm" style="margin-top:8px;">Completed</a></td>
             </tr>{% endfor %}
         </tbody>
     </table>
