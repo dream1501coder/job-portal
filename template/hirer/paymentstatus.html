@@ -1,0 +1,17 @@
+{% extends 'hirer/layout/master.html' %} {% load static %} {% block main %}
+<div class="container" style="margin-left: 20% !important;">
+    <div class="row">
+        {{response}}
+        <div class="col-md-4">
+            <div>
+                <div class="col-md-8 my-8">
+                    <h2>Payment status regarding your Id {{response.ORDERID}}</h2>
+                    {% if response.RESPCODE == '01' %} ORDER SUCCESS {% else %} ORDER FAILURE {% endif%}
+
+                </div>
+                <a href="{% url '../paystatus' %}">Go back</a>
+            </div>
+        </div>
+
+
+        {% endblock %}

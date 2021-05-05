@@ -19,7 +19,9 @@ urlpatterns = [
     path('bid_rate_show/<str:id>', views.bid_rate_show),
     path('project_bidding_approval/<int:id>', views.project_bidding_approval),
     path('payment_given/<str:id>', views.payment_given),
-    path('delete_project/<str:id>',views.delete_project)
+    path('delete_project/<str:id>',views.delete_project),
+    path('handlerequest/', views.handlerequest),
+    
 
 
 ]

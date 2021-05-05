@@ -120,7 +120,7 @@ def user_signup(request):
 			try:
 				user = User.objects.get(username=request.POST['username'])
 				messages.success(request,'This username is taken, please choose another username')
-				return render(request, 'freelancer/index.html', {'error':'please change username'})
+				return render(request, 'freelancer/registration.html', {'error':'please change username'})
 			except User.DoesNotExist:
 				user = User.objects.create_user(username=request.POST['username'], first_name=request.POST['fname'], last_name=request.POST['lname'], email=request.POST['email'], password=request.POST['password'])
 				auth.login(request, user)
@@ -149,25 +149,25 @@ def logout(request):
 	auth.logout(request)
 	return redirect('/')
 
-def login(request):
-	if request.method == 'POST' :
-		username= request.POST['username']
-		password= request.POST['password']
-		user=authenticate(request, username=username, password=password)
-		check_status = profile.objects.filter(user_id=user).filter(is_login='freelancer')
-		if len(check_status) == 1:
-			if user is not None:
-				auth.login(request, user)
-				return redirect('/')
-			else:
-				# messages.error(request,'Please Check Credentials')
-				return redirect('/')
-		else:
-			messages.error(request,'Please Check Credentials and try again')
+# def login(request):
+# 	if request.method == 'POST' :
+# 		username= request.POST['username']
+# 		password= request.POST['password']
+# 		user=authenticate(request, username=username, password=password)
+# 		check_status = profile.objects.filter(user_id=user).filter(is_login='freelancer')
+# 		if len(check_status) == 1:
+# 			if user is not None:
+# 				auth.login(request, user)
+# 				return redirect('/')
+# 			else:
+# 				# messages.error(request,'Please Check Credentials')
+# 				return redirect('/')
+# 		else:
+# 			messages.error(request,'Please Check Credentials and try again')
 			
-			return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
-	else:
-		return redirect('/')
+# 			return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
+# 	else:
+# 		return redirect('/')
 
 def bidding_rate(request, id):
 	
@@ -317,3 +317,26 @@ def contact(request):
 
 def registration(request):
 	return render(request, 'freelancer/registration.html')
+
+def logins(request):
+	if request.method == 'POST' :
+		username= request.POST['username']
+		password= request.POST['password']
+		user=authenticate(request, username=username, password=password)
+		check_status = profile.objects.filter(user_id=user).filter(is_login='freelancer')
+		if len(check_status) == 1:
+			if user is not None:
+				auth.login(request, user)
+				return redirect('/')
+			else:
+				# messages.error(request,'Please Check Credentials')
+				return redirect('/')
+		else:
+			messages.error(request,'Please Check Credentials and try again')
+			
+			return render(request, 'freelancer/login.html', {'error_login': "Please Check Credentials"})
+	else:
+		return redirect('/')
+
+def login(request):
+	return render(request, 'freelancer/login.html')

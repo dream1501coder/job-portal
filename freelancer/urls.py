@@ -1,6 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.contrib.auth import views as auth_views
+
+
+
+
 
 
 urlpatterns = [
@@ -9,6 +14,7 @@ urlpatterns = [
     path('signup', views.user_signup,name="signup"),
     path('logout', views.logout,name="logout"),
     path('login', views.login,name="login"),
+    path('logins', views.logins,name="logins"),
     path('report', views.report,name="report"),
     path('profile', views.show_profile,name="profile"),
     path('edit_profile/<str:id>', views.edit_profile,name="edit_profile"),
@@ -22,7 +28,15 @@ urlpatterns = [
     path('bidding_completed_progress/<int:id>', views.bidding_completed_progress,name="bidding_completed_progress"),
     path('registration', views.registration,name="registration"),
     path('search', views.search,name="search"),
-    
-    
-    
+
+
+    # url('^', include('django.contrib.auth.urls')),      
+    path('password_reset/',auth_views.PasswordResetView.as_view(template_name='freelancer/password/password_reset_form.html'),name='password_reset'),
+    path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='freelancer/password/password_reset_done.html'),name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='freelancer/password/password_reset_confirm.html'),name='password_reset_confirm'),
+    path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name='freelancer/password/password_reset_complete.html'),name='password_reset_complete'),
+
+    # path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+   

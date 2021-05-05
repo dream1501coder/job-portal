@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'freelancer',
     'hirer',
-    'admin1'
+    'admin1',
 ]
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -72,6 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'freelance.wsgi.application'
+
 
 
 # Database
@@ -130,3 +134,22 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 MEDIA_URL = "/media/"
+
+
+if DEBUG:
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+    EMAIL_USE_TLS = False
+    DEFAULT_FROM_EMAIL = 'testing@example.com'
+
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR,"sentmail")
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_POST = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'sapna.dream1512gupta@gmail.com'
+# EMAIL_HOST_PASSWORD ='Sapna@coder'
