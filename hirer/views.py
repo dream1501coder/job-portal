@@ -12,7 +12,7 @@ from django.contrib import messages #import messages
 from django.views.decorators.csrf import csrf_exempt
 from .paytm  import Checksum
 
-MERCHANT_KEY = 'Your-Merchant-Key-Herefdhfhfg133'
+MERCHANT_KEY = 'bKMfNxPPf_QdZppa'
 def show_profile(request):
 	if request.user.is_authenticated:
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
@@ -274,9 +274,9 @@ def payment_given(request, id):
 			payment_record.save()
 			param_dict={
             # 'MID': 'YOUR MERCHANT ID',
-            'MID': 'WorldP64425807474247',
-            'ORDER_ID': 'project_bid_rate.id',
-            'TXN_AMOUNT': '1',
+            'MID': 'DIY12386817555501617',
+            'ORDER_ID': 'project_bidding_rate',
+            'TXN_AMOUNT': received_amount,
             'CUST_ID': 'profile.email',
             'INDUSTRY_TYPE_ID': 'Retail',
             'WEBSITE': 'WEBSTAGING',
@@ -313,7 +313,7 @@ def handlerequest(request):
     verify = Checksum.verify_checksum(response_dict, MERCHANT_KEY, checksum)
     if verify:
         if response_dict['RESPCODE'] == '01':
-            print('Payment Successful')
+            print('Payment Successful')	
         else:
             print('Payment was not successful because' + response_dict['RESPMSG'])
     return render(request, 'hirer/paymentstatus.html', {'response': response_dict})

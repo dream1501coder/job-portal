@@ -112,7 +112,9 @@
 
                                 <li><a href="/hirer/login" class="nav-link">Be Hirer</a></li>
 
-                                <li><a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a></li>
+                                <!-- <li><a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a></li> -->
+
+                                <li class="{% if request.resolver_match.url_name == 'login' %}active1{% endif %}"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
 
                                 <li class="{% if request.resolver_match.url_name == 'registration' %}active1{% endif %}"><a href="{% url 'registration' %}" class="nav-link">Registration</a></li>
                                 {% endif %}
