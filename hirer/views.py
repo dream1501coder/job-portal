@@ -135,7 +135,10 @@ def paystatus(request):
 		check_status = profile.objects.filter(user_id=request.user).filter(is_login='hirer')
 		if len(check_status) == 1:
 			profile_payent_status = project_bid_rate.objects.filter(status="Approved")
+			# .filter(user=request.user)
+			# profile_data = profile.objects.filter(user_id=request.user)
 			payment_received_status = payment_report.objects.all()
+			# payment_received_status = add_project.objects.filter(user_id_id=request.user)
 			return render(request, 'hirer/paystatus.html',{'profile_payent_status':profile_payent_status,'payment_received_status':payment_received_status})
 		else:
 			return render(request, 'hirer/login.html', {'error_login': "Please Check Credentials"})	
@@ -275,7 +278,7 @@ def payment_given(request, id):
 			param_dict={
             # 'MID': 'YOUR MERCHANT ID',
             'MID': 'DIY12386817555501617',
-            'ORDER_ID': 'project_bidding_rate',
+            'ORDER_ID': payment_record.project,
             'TXN_AMOUNT': received_amount,
             'CUST_ID': 'profile.email',
             'INDUSTRY_TYPE_ID': 'Retail',
@@ -313,7 +316,8 @@ def handlerequest(request):
     verify = Checksum.verify_checksum(response_dict, MERCHANT_KEY, checksum)
     if verify:
         if response_dict['RESPCODE'] == '01':
-            print('Payment Successful')	
+            print('Payment Successful')
+
         else:
             print('Payment was not successful because' + response_dict['RESPMSG'])
     return render(request, 'hirer/paymentstatus.html', {'response': response_dict})

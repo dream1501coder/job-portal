@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from admin1.models import add_project
 
 
 class comment(models.Model):
@@ -20,6 +21,7 @@ class project_bid_rate(models.Model):
 	bid_rate = models.IntegerField(default="0")
 	comments = models.CharField(max_length=500, default="")
 	status = models.CharField(max_length=50, default="")
+	# last_date=models.ForeignKey(add_project, on_delete=models.CASCADE)
 	progress = models.CharField(max_length=50, default="")
 	create_at = models.DateTimeField(default=timezone.now)
 	updated_at = models.DateTimeField(default=timezone.now)

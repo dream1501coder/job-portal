@@ -1,7 +1,7 @@
 {% extends 'freelancer/layout/master.html' %} {% load static %} {% block main %}
 <br/><br/><br/><br/>
 
-<div class="container">
+<div class="container mt-2">
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
@@ -39,5 +39,6 @@
     <br/><br/> {% if messages %} {% for message in messages %} {% if message.tags %}
     <script>
         alert("{{ message }}")
-    </script> {% endif %} {% endfor %} {% endif %} {% endblock %}
+    </script> {% endif %} {% endfor %} {% endif %}
+     {% endblock %}
 </div>

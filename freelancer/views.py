@@ -17,6 +17,10 @@ def index(request):
 
 	# return render(request, 'freelancer/index.html')
 
+def getStarted(request):
+	return render(request, 'freelancer/login.html')
+
+
 def searchMatch(query,item):
 	# return true  only if query matches the item
 	if query in item.front_end.lower() or query in item.back_end.lower():
@@ -60,7 +64,7 @@ def edit_profile(request,id):
 			return render(request, 'freelancer/edit_profile.html', {'profile_data':profile_data})
 		else:
 			messages.success(request,'fisrt logout from another user account')
-			return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
+			return render(request, 'freelancer/index.html')
 	else:
 		messages.success(request,'Please Check Credentials')
 		return render(request, 'freelancer/index.html')
@@ -196,6 +200,7 @@ def bidding_starting_progress(request,id):
 	if len(check_status) == 1:
 		project_bid_starting_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
 		if len(project_bid_starting_detail_fetch) == 1:
+			messages.success(request,"Sorry, You can not send progress due to not get approved")
 			return redirect('/freelancer/report')
 		project_bid_starting_detail = project_bid_rate.objects.filter(id=id)
 		for x in project_bid_starting_detail:
@@ -218,6 +223,7 @@ def bidding_intermediate_progress(request,id):
 	if len(check_status) == 1:
 		project_bid_intermidiate_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
 		if len(project_bid_intermidiate_detail_fetch) == 1:
+			messages.success(request,"Sorry, You can not send progress due to not get approved")
 			return redirect('/freelancer/report')
 		project_bid_intermidiate_detail = project_bid_rate.objects.filter(id=id)
 		for x in project_bid_intermidiate_detail:
@@ -239,6 +245,7 @@ def bidding_mediate_progress(request,id):
 	if len(check_status) == 1:
 		project_bid_intermidiate_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
 		if len(project_bid_intermidiate_detail_fetch) == 1:
+			messages.success(request,"Sorry, You can not send progress due to not get approved")
 			return redirect('/freelancer/report')
 		project_bid_intermidiate_detail = project_bid_rate.objects.filter(id=id)
 		for x in project_bid_intermidiate_detail:
@@ -260,6 +267,7 @@ def bidding_finished_progress(request,id):
 	if len(check_status) == 1:
 		project_bid_intermidiate_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
 		if len(project_bid_intermidiate_detail_fetch) == 1:
+			messages.success(request,"Sorry, You can not send progress due to not get approved")
 			return redirect('/freelancer/report')
 		project_bid_intermidiate_detail = project_bid_rate.objects.filter(id=id)
 		for x in project_bid_intermidiate_detail:
@@ -281,6 +289,7 @@ def bidding_completed_progress(request,id):
 	if len(check_status) == 1:
 		project_bid_intermidiate_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
 		if len(project_bid_intermidiate_detail_fetch) == 1:
+			messages.success(request,"Sorry, You can not send progress due to not get approved")
 			return redirect('/freelancer/report')
 		project_bid_intermidiate_detail = project_bid_rate.objects.filter(id=id)
 		for x in project_bid_intermidiate_detail:

@@ -14,9 +14,13 @@
                         <p class="mb-5">Freelancing jobportal is one of best and 100% geniune freelancer site.</p>
                         <div>
 
-                            <!-- {% if user.is_authenticated %}
-                            <a href="/jobfeed" class="btn btn-primary mr-2 mb-2">Get Started</a> {% endif %} -->
-                            <a href="#" class="btn btn-primary mr-2 mb-2">Get Started</a>
+                             {% if user.is_authenticated %}
+                            <a href="/jobfeed" class="btn btn-primary mr-2 mb-2">Get Started</a> {% endif %} 
+
+                             {% if not user.is_authenticated %}
+                            <a href="/getStarted" class="btn btn-primary mr-2 mb-2">Get Started</a> {% endif %} 
+                            
+                        
                         </div>
                     </div>
 
@@ -46,11 +50,24 @@
                         <!-- <span class="icon-wrap" backgroundcolor="#F0FFFF"><img src="{% static 'images/FONT/android.png' %}" alt="Image" class="img-fluid rounded-circle"></span> -->
                         <span class="icon-wrap pt-3" backgroundcolor="#F0FFFF" style="color: black; font-size: 30px; font-weight: bolder;">{{forloop.counter}}</span>
                     </div>
-                    <div>
+                    {% if user.is_authenticated %}
+                            <a href="/jobfeed"> 
+                        <div>
                         <h3>Name : {{x.projectname}}</h3>
                         <p>Front-end : {{x.front_end}}</p>
                         <p>Back-end : {{x.back_end}}</p>
+                       
                     </div>
+                     </a> {% endif %}
+                     {% if not user.is_authenticated %}
+                            <a href="/getStarted">
+                               <div>
+                        <h3>Name : {{x.projectname}}</h3>
+                        <p>Front-end : {{x.front_end}}</p>
+                        <p>Back-end : {{x.back_end}}</p>
+                       
+                    </div>
+                     </a> {% endif %}
                 </div>
 
             </div>

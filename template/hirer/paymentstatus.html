@@ -5,11 +5,11 @@
         <div class="col-md-4">
             <div>
                 <div class="col-md-8 my-8">
-                    <h2>Payment status regarding your Id {{response.ORDERID}}</h2>
+                    <h5>Payment status regarding your Id {{response.project}}</h5>
                     {% if response.RESPCODE == '01' %} ORDER SUCCESS {% else %} ORDER FAILURE {% endif%}
 
                 </div>
-                <a href="{% url '../paystatus' %}">Go back</a>
+                <a href="/hirer/paystatus">Go back</a>
             </div>
         </div>
 

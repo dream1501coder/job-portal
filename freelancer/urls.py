@@ -28,6 +28,7 @@ urlpatterns = [
     path('bidding_completed_progress/<int:id>', views.bidding_completed_progress,name="bidding_completed_progress"),
     path('registration', views.registration,name="registration"),
     path('search', views.search,name="search"),
+    path('getStarted', views.getStarted,name="getStarted"),
 
 
     # url('^', include('django.contrib.auth.urls')),      
