@@ -12,7 +12,8 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'test/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'test/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'test/fonts/iconic/css/material-design-iconic-font.min.css' %}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'test/vendor/animate/animate.css' %}">
     <!--===============================================================================================-->
@@ -77,36 +78,39 @@
                 <div class="row align-items-center">
 
                     <div class="col-3 col-md-3 col-xl-3  d-block">
-                        <h1 class="mb-0 site-logo text-center"><a href="/" class="text-black h2 mb-0 ">Achievers<span class="text-primary">.</span> </a></h1>
+                        <h1 class="mb-0 site-logo text-center"><a href="/" class="text-black h2 mb-0 ">Achievers<span
+                                    class="text-primary">.</span> </a></h1>
                     </div>
 
-                    <div class="col-9 col-lg-9 col-xl-9 main-menu">
-                        <nav class="site-navigation position-relative  text-right" role="navigation">
+                    <div class="col-9 col-lg-9 col-xl-9 main-menu" id="myDIV">
+                        <nav class="site-navigation position-relative  text-right" onclick="myFunction(event)" id='navList' role="navigation">
 
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block ml-0 pl-0">
 
-                                <li class="{% if request.resolver_match.url_name == 'index' %}active1{% endif %}"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+                                <li><a href="{% url 'index' %}" class="nav-link">Home</a></li>
 
-                                <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}"><a href="/#project-section" class="nav-link">Projects</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}"><a href="/#project-section" class="nav-link ">Projects</a></li>
 
-                                <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}"><a href="/#features-section" class="nav-link">Features</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}"><a href="/#features-section" class="nav-link ">Features</a></li>
 
                                 <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}">
-                                    <a href="/#about-section" class="nav-link">About Us</a>
-
-                                </li>
+                                    <a href="/#about-section" class="nav-link">About Us</a></li>
 
                                 <li class="{% if request.resolver_match.url_name == 'index/' %}active1{% endif %}"><a href="/#contact-section" class="nav-link">Contact</a></li>
-                                <!--                <li><a href="/hirer/login" class="nav-link">Be Hirer</a></li>-->
+                                <!--<li><a href="/hirer/login" class="nav-link">Be Hirer</a></li>-->
 
                                 {% if user.is_authenticated %}
-                                <li class="{% if request.resolver_match.url_name == 'jobfeed' %}active1{% endif %}"><a href="{% url 'jobfeed' %}" class="nav-link">Jobfeed</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'jobfeed' %}active1{% endif %}"><a
+                                        href="{% url 'jobfeed' %}" class="nav-link">Jobfeed</a></li>
 
-                                <li class="{% if request.resolver_match.url_name == 'report' %}active1{% endif %}"><a href="{% url 'report' %}" class="nav-link">Reports</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'report' %}active1{% endif %}"><a
+                                        href="{% url 'report' %}" class="nav-link">Reports</a></li>
 
-                                <li class="{% if request.resolver_match.url_name == 'profile' %}active1{% endif %}"><a href="{% url 'profile' %}">Profile</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'profile' %}active1{% endif %}"><a
+                                        href="{% url 'profile' %}">Profile</a></li>
 
-                                <li class="{% if request.resolver_match.url_name == 'logout' %}active1{% endif %}"><a href="{% url 'logout' %}" class="nav-link">logout</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'logout' %}active1{% endif %}"><a
+                                        href="{% url 'logout' %}" class="nav-link">logout</a></li>
 
                                 {% else %}
 
@@ -114,9 +118,12 @@
 
                                 <!-- <li><a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a></li> -->
 
-                                <li class="{% if request.resolver_match.url_name == 'login' %}active1{% endif %}"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'login' %}active1{% endif %}"><a
+                                        href="{% url 'login' %}" class="nav-link">Login</a></li>
 
-                                <li class="{% if request.resolver_match.url_name == 'registration' %}active1{% endif %}"><a href="{% url 'registration' %}" class="nav-link">Registration</a></li>
+                                <li
+                                    class="{% if request.resolver_match.url_name == 'registration' %}active1{% endif %}">
+                                    <a href="{% url 'registration' %}" class="nav-link">Registration</a></li>
                                 {% endif %}
 
 
@@ -124,7 +131,9 @@
                         </nav>
                     </div>
 
-                    <div class="col-6 col-md-9 d-inline-block d-lg-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a></div>
+                    <div class="col-6 col-md-9 d-inline-block d-lg-none ml-md-0"><a href="#"
+                            class="site-menu-toggle js-menu-toggle text-black float-right"><span
+                                class="icon-menu h3"></span></a></div>
 
                 </div>
             </div>
@@ -133,7 +142,24 @@
         {% block main %} {% endblock %} {% block footer %}
 
 
-
+        <script>
+            // Add active class to the current button (highlight it)
+            // var header = document.getElementById("myDIV");
+            // var btns = header.getElementsByClassName("btn");
+            // for (var i = 0; i < btns.length; i++) {
+            //   btns[i].addEventListener("click", function() {
+            //   var current = document.getElementsByClassName("active");
+            //   current[0].className = current[0].className.replace(" active", "");
+            //   this.className += " active";
+            //   });
+            // }
+            function myFunction(e) {
+  if (document.querySelector('#navList a.active1') !== null) {
+    document.querySelector('#navList a.active1').classList.remove('active1');
+  }
+  e.target.className = "active1";
+}
+            </script>
 
         <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
         <script src="{% static 'js/jquery-ui.js' %}"></script>
@@ -162,15 +188,16 @@
                     <div class="limiter">
                         <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
                             <div class="wrap-login100">
-                                <form action="/login" method="POST" accept-charset="utf-8" class="login100-form validate-form">
+                                <form action="/login" method="POST" accept-charset="utf-8"
+                                    class="login100-form validate-form">
                                     {% csrf_token %}
                                     <span class="login100-form-logo">
-            <i class="zmdi zmdi-landscape"></i>
-          </span>
+                                        <i class="zmdi zmdi-landscape"></i>
+                                    </span>
 
                                     <span class="login100-form-title p-b-34 p-t-27">
-            Log in
-          </span>
+                                        Log in
+                                    </span>
 
                                     <div class="wrap-input100 validate-input" data-validate="Enter username">
                                         <input class="input100" type="text" name="username" placeholder="Username">
@@ -185,14 +212,14 @@
                                     <div class="contact100-form-checkbox">
                                         <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                                         <label class="label-checkbox100" for="ckb1">
-              Remember me
-            </label>
+                                            Remember me
+                                        </label>
                                     </div>
 
                                     <div class="container-login100-form-btn">
                                         <button type="submit" class="login100-form-btn">
-              Login
-            </button>
+                                            Login
+                                        </button>
                                     </div>
 
                                     <div class="text-center p-t-90">
@@ -228,6 +255,4 @@
                     <script src="{% static 'test/js/main.js' %}"></script>
 
 
-                    {% endblock %} {% block js %} 
-                    
-                    {% endblock %}
+                    {% endblock %} {% block js %} {% endblock %}
