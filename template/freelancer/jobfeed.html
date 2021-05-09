@@ -7,7 +7,7 @@
 
             <H2 class="col-md-8">Project List</H2>
             <form action="/search" method="GET" class="form-check-inline">
-                <input type="text" name="search" id="search" class="form-control border-primary search" placeholder="search projects..">
+                <input type="text" name="search" id="search" class="form-control border-primary search" placeholder="Search projects.." style="background: linear-gradient(to right,rgba(177, 176, 176, 0.767),rgb(236, 233, 233));">&nbsp;&nbsp;
                 <span><button type="submit"><i class="btn btn-primary btn-sm fa fa-search"> </i></button></span>
             </form>
         </div>
@@ -18,7 +18,7 @@
 
                     {% for x in job_data %}
 
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <h4>{{x.projectname}} &nbsp;&nbsp;&nbsp;<small style="font-size: 10px;">{{x.create_at}}</small></h4>
                         <p>{{x.description}}</p>
                         <p>Budget : $ {{x.amount}}</p>
@@ -28,7 +28,7 @@
 
 
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <center>Bidding Process</center>
                         <form action="/bidding_rate/{{x.projectname}}" method="POST">
                             {% csrf_token %}
@@ -98,7 +98,7 @@
                                                 <label>Comments</label>
                                                 <input type="text" name="comment" class="form-control" placeholder="Please Enter Your Comments">
                                             </center>
-                                            <center><input type="submit" value="submit" class="btn btn-success mt-1"></center>
+                                            <center><input type="submit" value="submit" class="btn btn-success mt-1" style="background: linear-gradient(to right, #016e01, #2ee674);"></center>
 
                                         </form>
 
