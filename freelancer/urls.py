@@ -5,9 +5,6 @@ from django.contrib.auth import views as auth_views
 
 
 
-
-
-
 urlpatterns = [
     path('', views.index,name='index'),
     path('jobfeed', views.jobfeed,name="jobfeed"),
@@ -29,6 +26,7 @@ urlpatterns = [
     path('registration', views.registration,name="registration"),
     path('search', views.search,name="search"),
     path('getStarted', views.getStarted,name="getStarted"),
+
     
 
 

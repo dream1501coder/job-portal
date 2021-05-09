@@ -11,6 +11,7 @@ class profile(models.Model):
 	address = models.CharField(max_length=35,default="0")
 	technology = models.CharField(max_length=35,default="0")
 	image = models.ImageField(default="")
+	# last_date=models.ForeignKey(add_project,default="", on_delete=models.CASCADE)
 	status = models.CharField(max_length=35,default="0")
 	is_login = models.CharField(default="", max_length=35)
 	create_at = models.DateTimeField(default=timezone.now)

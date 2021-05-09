@@ -9,6 +9,8 @@ from .models import profile
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages #import messages
+from django.conf import settings
+from django.core.mail import send_mail
 
 def index(request):
 	all_data =add_project.objects.filter(status="Approved").order_by('-create_at')
@@ -18,6 +20,8 @@ def index(request):
 	# return render(request, 'freelancer/index.html')
 
 def getStarted(request):
+	
+
 	return render(request, 'freelancer/login.html')
 
 
@@ -118,6 +122,9 @@ def report(request):
 		project_bid_detail = project_bid_rate.objects.filter(user=request.user)
 		payment_received_status = payment_report.objects.all()
 		return render(request, 'freelancer/report.html',{'project_bid_detail':project_bid_detail, 'payment_received_status':payment_received_status})
+		# project_status = project_bid_rate.objects.filter(user=request.user).filter(status='Approved')
+
+
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
@@ -143,6 +150,11 @@ def user_signup(request):
 				is_login = "freelancer"
 				profile_data_store = profile(user_id=user, phonenumber=phonenumber, address=address, technology=technology, image=url1, status=status, is_login=is_login)
 				profile_data_store.save()
+				subject = 'welcome to Achivers'
+				message = f'Hi {user.username}, thank you for registering in Achievers.'
+				email_from = settings.EMAIL_HOST_USER
+				recipient_list = [user.email, ]
+				send_mail( subject, message, email_from, recipient_list )
 				messages.success(request, 'Welcome user, registered successfully')
 				return redirect('/')
 		else:
@@ -318,6 +330,12 @@ def contact(request):
 			message = request.POST['message']
 			message_stored = comment(fname=fname,lname=lname,email=email,subject=subject,message=message)
 			message_stored.save()
+			# subject = 'welcome to GFG world'
+			# message = f'Hi {user.username}, thank you for registering in geeksforgeeks.'
+			# email_from = settings.EMAIL_HOST_USER
+			# recipient_list = [user.email, ]
+			# final_msg = f'Message from {fname}{ lname},{message'
+			send_mail(subject, message, email, ['sapna.dream1512gupta@gmail.com'])
 			messages.success(request, 'Thanks for contacting us. We wil get back to you soon!')
 			return redirect('/')
 			# return render_to_response('template_name', message='Save complete')
