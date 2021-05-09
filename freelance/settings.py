@@ -135,14 +135,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 MEDIA_URL = "/media/"
 
-
-if DEBUG:
-    EMAIL_HOST = 'localhost'
-    EMAIL_PORT = 1025
-    EMAIL_HOST_USER = ''
-    EMAIL_HOST_PASSWORD = ''
-    EMAIL_USE_TLS = False
-    DEFAULT_FROM_EMAIL = 'testing@example.com'
+# for the cmd reset pwd
+# if DEBUG:
+#     EMAIL_HOST = 'localhost'
+#     EMAIL_PORT = 1025
+#     EMAIL_HOST_USER = ''
+#     EMAIL_HOST_PASSWORD = ''
+#     EMAIL_USE_TLS = False
+#     DEFAULT_FROM_EMAIL = 'testing@example.com'
 
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR,"sentmail")
@@ -153,3 +153,10 @@ if DEBUG:
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'sapna.dream1512gupta@gmail.com'
 # EMAIL_HOST_PASSWORD ='Sapna@coder'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sapna.dream1512gupta@gmail.com' 
+EMAIL_HOST_PASSWORD = 'bmymbtrayzmpwgst'
+EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'user'
+EMAIL_USE_TLS = True

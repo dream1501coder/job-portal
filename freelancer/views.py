@@ -28,6 +28,9 @@ def searchMatch(query,item):
 	else:
 		return False
 
+
+
+
 def search(request):
 	query = request.GET.get('search')
 	if len(query)==0:
