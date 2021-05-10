@@ -27,11 +27,11 @@
                 <td>{{x.progress}}</td>
                 <td>{{x.bid_rate}}</td>
                 <td> {% for y in payment_received_status %} {% if x.project == y.project %} {{y.received_amount}} {% endif %} {% endfor %}</td>
-                <td><a href="/freelancer/bidding_starting_progress/{{x.id}}" class="btn btn-info btn-sm">Starting</a>
-                    <a href="/freelancer/bidding_intermediate_progress/{{x.id}}" class="btn btn-warning btn-sm">Intermediate</a>
-                    <a href="/freelancer/bidding_mediate_progress/{{x.id}}" class="btn btn-primary btn-sm" style="margin-top:8px;margin-left:70px;">Mediate</a><br>
-                    <a href="/freelancer/bidding_finished_progress/{{x.id}}" class="btn btn-secondary btn-sm" style="margin-top:8px;">finished</a>
-                    <a href="/freelancer/bidding_completed_progress/{{x.id}}" class="btn btn-success btn-sm" style="margin-top:8px;">Completed</a></td>
+                <td><a href="/freelancer/bidding_starting_progress/{{x.id}}" class="btn btn-info btn-sm" style="background: linear-gradient(to right,rgb(90, 170, 190),rgb(214, 229, 241));">Starting</a>
+                    <a href="/freelancer/bidding_intermediate_progress/{{x.id}}" class="btn btn-warning btn-sm" style="background: linear-gradient(to right,rgb(220, 223, 62),rgb(250, 249, 197));">Intermediate</a>
+                    <a href="/freelancer/bidding_mediate_progress/{{x.id}}" class="btn btn-primary btn-sm" style="margin-top:8px;margin-left:70px;background: linear-gradient(to right,rgb(79, 152, 247),rgb(172, 211, 208));">Mediate</a><br>
+                    <a href="/freelancer/bidding_finished_progress/{{x.id}}" class="btn btn-secondary btn-sm" style="margin-top:8px;background: linear-gradient(to right,rgb(83, 241, 62),rgb(205, 236, 168));">finished</a>
+                    <a href="/freelancer/bidding_completed_progress/{{x.id}}" class="btn btn-success btn-sm" style="margin-top:8px;background: linear-gradient(to right,rgb(38, 114, 2),rgb(94, 218, 78));">Completed</a></td>
             </tr>{% endfor %}
         </tbody>
     </table>
