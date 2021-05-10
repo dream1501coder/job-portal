@@ -61,7 +61,7 @@
                             {% for y in payment_received_status %} {% if x.project == y.project %} {{y.received_amount}} {% endif %} {% endfor %}
                         </td>
                         <td>{{x.create_at}}</td>
-                        <td><a href="/hirer/payment_given/{{x.project}}" class="btn btn-primary">Payment</a></td>
+                        <td><a href="/hirer/payment_given/{{x.project}}" class="btn btn-primary" style="background: linear-gradient(to right,rgb(97, 130, 221),rgb(172, 211, 247));">Payment</a></td>
 
                         </form>
         </div>
