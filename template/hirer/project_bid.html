@@ -4,35 +4,35 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-10 ml-5 pl-4">
+        <div class="col-md-10">
             <center>
-                <h1><u>Project Bidding Information</u></h1>
+                <h2><u>Project Bidding Information</u></h2>
             </center>
 
             <br/> {% for x in project_information %}
-            <h3>Project Name : {{x.projectname}}</h3>
+            <h4>Project Name : {{x.projectname}}</h4>
             <hr/>
-            <h3>Project Description :<small>{{x.description}}</small></h3>
+            <h4>Project Description : <small>{{x.description}}</small></h4>
             <hr/>
-            <h3>Project Start Time :{{x.start_time}}</h3>
+            <h4>Project Start Time : {{x.start_time}}</h4>
             <hr/>
-            <h3>Project End Time :{{x.end_time}}</h3>
+            <h4>Project End Time : {{x.end_time}}</h4>
             <hr/>
-            <h3>Project Budget :{{x.amount}}</h3>
+            <h4>Project Budget : {{x.amount}}</h4>
             <hr/>
-            <h3>Project Front End :{{x.front_end}}</h3>
+            <h4>Project Front End : {{x.front_end}}</h4>
             <hr/>
-            <h3>Project Back End :{{x.back_end}}</h3>
+            <h4>Project Back End : {{x.back_end}}</h4>
             <hr/> {% for y in project_bid_show_detail %}
-            <h3>Project Status :{{y.status}}</h3>
+            <h4>Project Status : {{y.status}}</h4>
             <hr/>
-            <h3>Bid Rate :{{y.bid_rate}}</h3>
+            <h4>Bid Rate : {{y.bid_rate}}</h4>
             <hr/>
-            <h3>Comments :{{y.comments}}</h3>
+            <h4>Comments : {{y.comments}}</h4>
             <hr/>
-            <h3>Status :{{y.status}}</h3>
+            <h4>Status : {{y.status}}</h4>
             <hr/>
-            <h3>Acceptation:&nbsp;&nbsp;&nbsp;&nbsp;<a href="/hirer/project_bidding_approval/{{y.id}}" class="btn btn-success">Approve bidding</a></h3>
+            <h4>Acceptation:&nbsp;&nbsp;&nbsp;<a href="/hirer/project_bidding_approval/{{y.id}}" class="btn btn-success">Approve bidding</a></h3>
             <hr/> {% endfor %} {% endfor %}
         </div>
     </div>
