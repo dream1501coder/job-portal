@@ -12,6 +12,7 @@
                     <tr>
                         <th>No:</th>
                         <th>Project Name</th>
+                        <th>Last Date</th>
                         <th>Freelancer Name</th>
                         <th>Email</th>
                         <th>Budget</th>
@@ -23,6 +24,7 @@
                     <tr>
                         <td>{{forloop.counter}}</td>
                         <td>{{x.project}}</td>
+                        <td>{{x.end_date}}</td>
                         <td>{{x.user.first_name}}&nbsp;{{x.user.last_name}}</td>
                         <td>{{x.user.email}}</td>
                         <td>{{x.bid_rate}}</td>

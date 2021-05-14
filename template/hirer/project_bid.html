@@ -32,7 +32,7 @@
             <hr/>
             <h4>Status : {{y.status}}</h4>
             <hr/>
-            <h4>Acceptation:&nbsp;&nbsp;&nbsp;<a href="/hirer/project_bidding_approval/{{y.id}}" class="btn btn-success">Approve bidding</a></h3>
+            <h4>Acceptation:&nbsp;&nbsp;&nbsp;<a href="/hirer/project_bidding_approval/{{y.id}}/{{x.end_time}}" class="btn btn-success">Approve bidding</a></h3>
             <hr/> {% endfor %} {% endfor %}
         </div>
     </div>
@@ -50,9 +50,9 @@
                         <th>Freelancer Name</th>
                         <th>Budget</th>
                         <th>comments</th>
-                        <th>Timing</th>
+                        {% comment %} <th>Last Date</th> {% endcomment %}
                         <th>Status</th>
-                        <th>Created Time</th>
+                        {% comment %} <th>Created Time</th> {% endcomment %}
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -64,10 +64,10 @@
                         <td>{{x.user.first_name}}&nbsp;&nbsp;{{x.user.last_name}}</td>
                         <td>{{x.bid_rate}}</td>
                         <td>{{x.comments}}</td>
-                        <td>{{x.create_at}}</td>
+                        {% comment %} <td>{{x.end_date}}</td> {% endcomment %}
                         <td>{{x.status}}</td>
-                        <td>{{x.create_at}}</td>
-                        <td><a href="/hirer/bid_rate_show/{{x.project}}" class="btn btn-warning" style="background: linear-gradient(to right,rgb(241, 186, 5),rgb(253, 255, 130));">Show</a></td>
+                        {% comment %} <td>{{x.create_at}}</td> {% endcomment %}
+                        <td><a href="/hirer/bid_rate_show/{{x.project}}/{{x.end_date}}" class="btn btn-warning" style="background: linear-gradient(to right,rgb(241, 186, 5),rgb(253, 255, 130));">Show</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

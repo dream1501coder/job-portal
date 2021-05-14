@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-5">
                         <center>Bidding Process</center>
-                        <form action="/bidding_rate/{{x.projectname}}" method="POST">
+                        <form action="/bidding_rate/{{x.projectname}}/{{x.end_time}}" method="POST">
                             {% csrf_token %}
                             <center>
                                 <label>Bid Rate:</label>

@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages #import messages
 from django.conf import settings
 from django.core.mail import send_mail
+import datetime
 
 def index(request):
 	all_data =add_project.objects.filter(status="Approved").order_by('-create_at')
@@ -20,7 +21,6 @@ def index(request):
 	# return render(request, 'freelancer/index.html')
 
 def getStarted(request):
-	
 
 	return render(request, 'freelancer/login.html')
 
@@ -188,7 +188,10 @@ def logout(request):
 # 	else:
 # 		return redirect('/')
 
-def bidding_rate(request, id):
+def bidding_rate(request,id,end_time):
+	# end_time1=end_time[:12]
+	# format_str = 'm %d %y' # The format
+	# end_time2 = datetime.datetime.strptime(end_time1, format_str)
 	
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 	if len(check_status) == 1:
@@ -197,11 +200,12 @@ def bidding_rate(request, id):
 			comments = request.POST['comment']
 			status = "Not Approved"
 			progress = ""
+			
 			if len(bid_rate)==0 and len(comments)==0:
 				messages.success(request,' please enter your bidrate and comments before submit')
 				return redirect('/jobfeed')
 			else:
-				project_bid_rate_store = project_bid_rate(bid_rate=bid_rate, project=id, user=request.user, comments=comments, status=status,progress=progress)
+				project_bid_rate_store = project_bid_rate(bid_rate=bid_rate, project=id, user=request.user, comments=comments, status=status,end_date=end_time,progress=progress)
 				project_bid_rate_store.save()
 				messages.success(request,'your bidrate has been sent,We wil get back to you very soon!')
 				return redirect('/freelancer/jobfeed')
@@ -209,7 +213,7 @@ def bidding_rate(request, id):
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
 
-def bidding_starting_progress(request,id):
+def bidding_starting_progress(request,id,end_time):
 
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 	if len(check_status) == 1:
@@ -225,7 +229,7 @@ def bidding_starting_progress(request,id):
 				comments = x.comments
 				status = "Approved"
 				progress = "starting"
-		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
+		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status,end_date=end_time, progress=progress)
 		project_bid_rate_store.save()
 		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
@@ -233,7 +237,7 @@ def bidding_starting_progress(request,id):
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
 
-def bidding_intermediate_progress(request,id):
+def bidding_intermediate_progress(request,id,end_time):
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 	if len(check_status) == 1:
 		project_bid_intermidiate_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
@@ -248,14 +252,14 @@ def bidding_intermediate_progress(request,id):
 				comments = x.comments
 				status = "Approved"
 				progress = "intermediate"
-		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
+		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status,end_date=end_time,progress=progress)
 		project_bid_rate_store.save()
 		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
-def bidding_mediate_progress(request,id):
+def bidding_mediate_progress(request,id,end_time):
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 	if len(check_status) == 1:
 		project_bid_intermidiate_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
@@ -270,14 +274,14 @@ def bidding_mediate_progress(request,id):
 				comments = x.comments
 				status = "Approved"
 				progress = "mediate"
-		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
+		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status,end_date=end_time, progress=progress)
 		project_bid_rate_store.save()
 		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
-def bidding_finished_progress(request,id):
+def bidding_finished_progress(request,id,end_time):
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 	if len(check_status) == 1:
 		project_bid_intermidiate_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
@@ -292,14 +296,14 @@ def bidding_finished_progress(request,id):
 				comments = x.comments
 				status = "Approved"
 				progress = "finished"
-		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
+		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status,end_date=end_time, progress=progress)
 		project_bid_rate_store.save()
 		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
 	else:
 		return render(request, 'freelancer/index.html', {'error_login': "Please Check Credentials"})
 
-def bidding_completed_progress(request,id):
+def bidding_completed_progress(request,id,end_time):
 	check_status = profile.objects.filter(user_id=request.user).filter(is_login='freelancer')
 	if len(check_status) == 1:
 		project_bid_intermidiate_detail_fetch = project_bid_rate.objects.filter(id=id).filter(status='Not Approved')
@@ -314,7 +318,7 @@ def bidding_completed_progress(request,id):
 				comments = x.comments
 				status = "Approved"
 				progress = "completed"
-		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status, progress=progress)
+		project_bid_rate_store = project_bid_rate(id=id, bid_rate=bid_rate, project=project, user=user, comments=comments, status=status,end_date=end_time, progress=progress)
 		project_bid_rate_store.save()
 		messages.success(request,'Project status has been sent to hirer')
 		return redirect('/freelancer/report')
